@@ -4,10 +4,19 @@ body {
     flex-direction: column;
 }
 
-.changeButtons {
+/* .container {
+    height: 100vh;
+} */
+
+.info {
     margin-top: 100px;
 }
 
 .controls {
     margin-top: 100px;
+    margin-bottom: 45%;
+}
+
+.timer {
+    padding-top: 10%;
 }
