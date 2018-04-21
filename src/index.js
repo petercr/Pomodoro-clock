@@ -1,10 +1,13 @@
-let timer = parseInt(document.getElementById('timer').innerText);
-let breakTimer = parseInt(document.getElementById('breakTimer').innerText);
 let date = new Date();
+let timer = 25 * 60;
+let breakTimer = 5 * 60;
+date.setMinutes(timer / 60);
+date.setSeconds(timer);
+
 
 // 
 (function() {
-    date.setMinutes(timer - 1);
+    
     let x = date.getSeconds();
     let y = date.getMinutes();
 
@@ -18,4 +21,11 @@ let date = new Date();
 // get the current date to use as a basis for the timer
 function getTheDate() {
     date = new Date();
+}
+
+/* function to start the clock which
+*  takes amount of seconds to count 
+*/
+function startTheClock(seconds) {
+
 }
