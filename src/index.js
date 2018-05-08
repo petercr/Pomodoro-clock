@@ -1,8 +1,11 @@
+// create new Date object
 let date = new Date();
-let timer = 25 * 60;
+
+// timer amount times 60 to convert for seconds 
+let timer = 25 * 60; 
 let breakTimer = 5 * 60;
-date.setMinutes(timer / 60);
-date.setSeconds(timer);
+date.setMinutes(25);
+date.setSeconds(0);
 
 
 // 
@@ -11,7 +14,7 @@ date.setSeconds(timer);
     let x = date.getSeconds();
     let y = date.getMinutes();
 
-    console.log(`${x}  +  ${y}`);
+    console.log(`${y} mins +  ${x} seconds`);
     
     console.log(`Timer: ${timer} & Break: ${breakTimer}`);
     console.log(date.getMinutes());
@@ -27,5 +30,15 @@ function getTheDate() {
 *  takes amount of seconds to count 
 */
 function startTheClock(seconds) {
+    let mainTimer = document.getElementById("timer");
+
+    setInterval(function(){
+        if (mainTimer.innerText == 0){
+            clearInterval();
+        }
+        let currentTime = parseInt(mainTimer.innerText);
+        currentTime -= 1;
+        mainTimer.innerText = currentTime.toString();
+    }, 1000);
 
 }
