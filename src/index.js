@@ -30,15 +30,23 @@ function getTheDate() {
 *  takes amount of seconds to count 
 */
 function startTheClock(seconds) {
-    let mainTimer = document.getElementById("timer");
+    // get Time from the main timer on the page
+    let getTime = document.getElementById("timer").innerText.split(':');
 
-    setInterval(function(){
-        if (mainTimer.innerText == 0){
-            clearInterval();
-        }
-        let currentTime = parseInt(mainTimer.innerText);
-        currentTime -= 1;
-        mainTimer.innerText = currentTime.toString();
-    }, 1000);
+    // set variables for minutes and seconds in milliseconds
+    const minutesToMils = getTime[0] * 60 * 1000;
+    const secondsToMils = getTime[1] * 1000;
 
+    // var to hold the added value of minutes and seconds
+    let totalMils = minutesToMils + secondsToMils;
+    console.log(totalMils);
+    
+    let theClock = window.setTimeout(alarm, totalMils);
+    
+
+}
+
+// Function that is activated when alarm goes off 
+function alarm() {
+    alert("ALARM");
 }
