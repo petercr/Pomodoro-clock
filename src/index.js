@@ -1,36 +1,21 @@
-// create new Date object
-let date = new Date();
+
 
 // timer amount times 60 to convert for seconds 
 let timer = 25 * 60; 
 let breakTimer = 5 * 60;
-date.setMinutes(25);
-date.setSeconds(0);
+
 
 
 // 
 (function() {
+    // initialize the drop down menu from Materialize CSS
     const alarmSounds = document.querySelectorAll("select");
     const alarmSelection = M.FormSelect.init(alarmSounds);
     
-    let x = date.getSeconds();
-    let y = date.getMinutes();
-
-    console.log(`${y} mins +  ${x} seconds`);
     
-    console.log(`Timer: ${timer} & Break: ${breakTimer}`);
-    console.log(date.getMinutes());
 })();
 
 
-// get the current date to use as a basis for the timer
-function getTheDate() {
-    date = new Date();
-}
-
-/* function to start the clock which
-*  takes amount of seconds to count 
-*/
 function startTheClock(seconds) {
     // get Time from the main timer on the page
     let getTime = document.getElementById("timer").innerText.split(':');
@@ -43,6 +28,7 @@ function startTheClock(seconds) {
     let totalMils = minutesToMils + secondsToMils;
     console.log(totalMils);
     
+    // waits the total minutes and seconds then calls alarm()
     let theClock = window.setTimeout(alarm, totalMils);
     
 
