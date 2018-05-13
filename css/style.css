@@ -14,9 +14,14 @@ body {
 
 .controls {
     margin-top: 10%;
-    margin-bottom: 35%;
+    margin-bottom: 15%;
+    padding-bottom: 5%;
 }
 
 .timer {
     padding-top: 2%;
+}
+
+.alarms {
+    padding-top: 5%;
 }
