@@ -10,6 +10,8 @@ date.setSeconds(0);
 
 // 
 (function() {
+    const alarmSounds = document.querySelectorAll("select");
+    const alarmSelection = M.FormSelect.init(alarmSounds);
     
     let x = date.getSeconds();
     let y = date.getMinutes();
