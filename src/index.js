@@ -45,6 +45,11 @@ function startTheClock(seconds) {
         stopTheClock(theClock);
     });
 
+    // if seconds != zero then count down seconds to zero
+    if (secondsToMils !== 0){
+
+    }
+
     
 
 }
@@ -56,7 +61,20 @@ function alarm() {
 
 // Function to handle the seconds clock
 function secondsTicker() {
-    let seconds = document.getElementById("timer").textContent;
+    let clock = document.getElementById("timer").textContent;
+    let timeArr = clock.split(":");
+    let seconds = timerArr[1];
+
+    // if there's more than one second left minus 1 second
+    if (seconds > 1){
+        seconds--;
+    } 
+    // if no more seconds then exit function 
+    else {
+        return;
+    }
+    
+    clock.textContent = timerArr[0] + ":" + seconds;
 
 }
 
