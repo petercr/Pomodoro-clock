@@ -58,7 +58,9 @@ function startTheClock(duration) {
   document
     .querySelector("#stopButton")
     .addEventListener("click", function(theClock) {
-      stopTheClock(theClock);
+    //   stopTheClock(theClock);
+        window.clearInterval(mainTimer);
+        window.clearTimeout(alarmTimer);
     });
 
   
