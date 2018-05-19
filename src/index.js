@@ -7,6 +7,15 @@ let breakTimer = 5 * 60;
   // initialize the drop down menu from Materialize CSS
   const alarmSounds = document.querySelectorAll("select");
   const alarmSelection = M.FormSelect.init(alarmSounds);
+  
+
+  // log the dropdown selection in console
+  document.querySelector("#alarmOptions").addEventListener("click", function() {
+    let sounds = document.querySelectorAll("select");
+    let results = M.FormSelect.getInstance(alarmSounds);
+    console.log(results);
+  });
+  
 
   // add event listener for the start button
   document.querySelector("#startButton").addEventListener("click", () => {
