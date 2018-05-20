@@ -10,11 +10,11 @@ let breakTimer = 5 * 60;
   
 
   // log the dropdown selection in console
-  document.querySelector("#alarmOptions").addEventListener("click", function() {
-    let sounds = document.querySelectorAll("select");
-    let results = M.FormSelect.getInstance(alarmSounds);
-    console.log(results);
-  });
+  // document.querySelector("#alarmOptions").addEventListener("click", function() {
+  //   let sounds = document.querySelectorAll("select");
+  //   let results = M.FormSelect.getInstance(alarmSounds);
+  //   console.log(results);
+  // });
   
 
   // add event listener for the start button
