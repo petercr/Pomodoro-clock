@@ -2,19 +2,23 @@
 let timer = 25 * 60;
 let breakTimer = 5 * 60;
 
+
+// initialize the drop down menu from Materialize CSS
+const alarmSounds = document.querySelectorAll("select");
+const alarmSelection = M.FormSelect.init(alarmSounds);
+
 // IEEF fucntion to call on DOM load
 (function() {
-  // initialize the drop down menu from Materialize CSS
-  const alarmSounds = document.querySelectorAll("select");
-  const alarmSelection = M.FormSelect.init(alarmSounds);
+  
+
+  function droppy(alarmSelect) {
+    let stuff = M.FormSelect.getInstance(alarmSelect);
+    console.log(stuff);
+  }
   
 
   // log the dropdown selection in console
-  // document.querySelector("#alarmOptions").addEventListener("click", function() {
-  //   let sounds = document.querySelectorAll("select");
-  //   let results = M.FormSelect.getInstance(alarmSounds);
-  //   console.log(results);
-  // });
+  document.querySelector("#alarmOptions").addEventListener("click", droppy(alarmSelection));
   
 
   // add event listener for the start button
