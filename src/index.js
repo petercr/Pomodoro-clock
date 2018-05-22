@@ -11,19 +11,15 @@ const alarmSelection = M.FormSelect.init(alarmSounds, "active");
 (function() {
   
 
-  function droppy(alarmSelect) {
-    let stuff = M.FormSelect.getInstance(alarmSelect);
+  function dropDown(e) {
+    let stuff = e.target.value;
     console.log(stuff);
   }
   
+  // listen for change in select value, and call dropDown()
+  document.querySelector("select").addEventListener("change", dropDown);
 
-  // log the dropdown selection in console
-  document.querySelector(".browser-default").addEventListener("change", function (){
-    // have to use jQuery .val() in order to get value
-    // hopefully I can replace with JS
-    console.log($(this).val());
-    
-  });
+
   
 
   // add event listener for the start button
