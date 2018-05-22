@@ -5,7 +5,7 @@ let breakTimer = 5 * 60;
 
 // initialize the drop down menu from Materialize CSS
 const alarmSounds = document.querySelectorAll("select");
-const alarmSelection = M.FormSelect.init(alarmSounds);
+const alarmSelection = M.FormSelect.init(alarmSounds, "active");
 
 // IEEF fucntion to call on DOM load
 (function() {
@@ -18,7 +18,12 @@ const alarmSelection = M.FormSelect.init(alarmSounds);
   
 
   // log the dropdown selection in console
-  document.querySelector("#alarmOptions").addEventListener("click", droppy(alarmSelection));
+  document.querySelector(".browser-default").addEventListener("change", function (){
+    // have to use jQuery .val() in order to get value
+    // hopefully I can replace with JS
+    console.log($(this).val());
+    
+  });
   
 
   // add event listener for the start button
