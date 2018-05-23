@@ -17,7 +17,7 @@ const alarmSelection = M.FormSelect.init(alarmSounds, "active");
   }
   
   // listen for change in select value, and call dropDown()
-  document.querySelector("select").addEventListener("change", dropDown);
+  document.querySelector(".browser-default").addEventListener("change", dropDown);
 
 
   
