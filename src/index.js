@@ -17,7 +17,7 @@ const alarmSelection = M.FormSelect.init(alarmSounds, "active");
   }
   
   // listen for change in select value, and call dropDown()
-  document.querySelector("select").addEventListener("change", dropDown);
+  document.querySelector(".browser-default").addEventListener("change", dropDown);
 
 
   
@@ -42,7 +42,6 @@ function startTheClock(duration) {
   const display = document.querySelector("#timer");
 
   function timer() {
-    // const display = document.querySelector("#timer");
     // get the number of seconds that have elapsed since
     // startTimer() was called
     diff = duration - (((Date.now() - start) / 1000) | 0);
