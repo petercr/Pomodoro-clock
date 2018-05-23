@@ -77,7 +77,7 @@ function startTheClock(duration) {
     });
 
   
-}
+} // end of timer()
 
 // Function that is activated when alarm goes off
 function alarm() {
@@ -90,4 +90,21 @@ function stopTheClock(clock) {
   window.clearTimeout(alarmTimer);
   window.clearInterval(mainTimer);
   console.log("timer stopped");
+}
+
+// Function for timer up & down buttons
+function adjustTimer(direction) {
+  const timerDisplay = document.querySelector("#timer");
+  let getTimeArr = timerDisplay.innerText.split(":");
+
+  if (direction === "up") {
+    let minutes = parseInt(getTimeArr[0]);
+    minutes++;
+    timerDisplay.innerText = minutes + ":" + getTimeArr[1];
+  }
+  else if (direction === "down") {
+    let minutes = parseInt(getTimeArr[0]);
+    minutes--;
+    timerDisplay.innerText = minutes + ":" + getTimeArr[1];
+  }
 }
