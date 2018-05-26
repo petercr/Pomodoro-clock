@@ -6,12 +6,18 @@ let breakTimer = 5 * 60;
 const alarmSounds = document.querySelectorAll("select");
 const alarmSelection = M.FormSelect.init(alarmSounds, "active");
 
+// initialize the modal for the alarm
+const alarmModal = document.querySelector(".modal");
+const instances = M.Modal.init(alarmModal);
+
 // IEEF fucntion to call on DOM load
 (function() {
   function dropDown(e) {
     let stuff = e.target.value;
     console.log(stuff);
   }
+
+
 
   // listen for change in select value, and call dropDown()
   document
