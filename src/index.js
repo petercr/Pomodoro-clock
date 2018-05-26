@@ -2,25 +2,21 @@
 let timer = 25 * 60;
 let breakTimer = 5 * 60;
 
-
 // initialize the drop down menu from Materialize CSS
 const alarmSounds = document.querySelectorAll("select");
 const alarmSelection = M.FormSelect.init(alarmSounds, "active");
 
 // IEEF fucntion to call on DOM load
 (function() {
-  
-
   function dropDown(e) {
     let stuff = e.target.value;
     console.log(stuff);
   }
-  
+
   // listen for change in select value, and call dropDown()
-  document.querySelector(".browser-default").addEventListener("change", dropDown);
-
-
-  
+  document
+    .querySelector(".browser-default")
+    .addEventListener("change", dropDown);
 
   // add event listener for the start button
   document.querySelector("#startButton").addEventListener("click", () => {
@@ -66,24 +62,20 @@ function startTheClock(duration) {
   let mainTimer = setInterval(timer, 1000);
   let alarmTimer = setTimeout(alarm, duration * 1000);
 
-  
   // add event listener for the stop button
   document
     .querySelector("#stopButton")
     .addEventListener("click", function(theClock) {
-    //   stopTheClock(theClock);
-        window.clearInterval(mainTimer);
-        window.clearTimeout(alarmTimer);
+      //   stopTheClock(theClock);
+      window.clearInterval(mainTimer);
+      window.clearTimeout(alarmTimer);
     });
-
-  
 } // end of timer()
 
 // Function that is activated when alarm goes off
 function alarm() {
   alert("ALARM");
 }
-
 
 // Function to stop the clock
 function stopTheClock(clock) {
@@ -94,17 +86,32 @@ function stopTheClock(clock) {
 
 // Function for timer up & down buttons
 function adjustTimer(direction) {
+  // variables to hold the DOM elements of timer and break timer
   const timerDisplay = document.querySelector("#timer");
+  const breakDisplay = document.querySelector("#breakTimer");
+
+  // turn both the timer and break timer into arrays with minutes and seconds
   let getTimeArr = timerDisplay.innerText.split(":");
+  let getBreakArr = breakDisplay.innerText.split(":");
 
   if (direction === "up") {
     let minutes = parseInt(getTimeArr[0]);
     minutes++;
     timerDisplay.innerText = minutes + ":" + getTimeArr[1];
-  }
+  } 
   else if (direction === "down") {
     let minutes = parseInt(getTimeArr[0]);
     minutes--;
     timerDisplay.innerText = minutes + ":" + getTimeArr[1];
+  }
+  else if (direction === "breakUp") {
+    let minutes = parseInt(getBreakArr[0]);
+    minutes++;
+    breakDisplay.innerText = minutes + ":" + getBreakArr[1];
+  }
+  else if (direction === "breakDown") {
+    let minutes = parseInt(getBreakArr[0]);
+    minutes--;
+    breakDisplay.innerText = minutes + ":" + getBreakArr[1];
   }
 }
