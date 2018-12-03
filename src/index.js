@@ -2,22 +2,21 @@
 let timer = 25 * 60;
 let breakTimer = 5 * 60;
 
-// initialize the drop down menu from Materialize CSS
-const alarmSounds = document.querySelectorAll("select");
-const alarmSelection = M.FormSelect.init(alarmSounds, "active");
+M.AutoInit();
+// // initialize the drop down menu from Materialize CSS
+// const alarmSounds = document.querySelectorAll("select");
+// const alarmSelection = M.FormSelect.init(alarmSounds, "active");
 
-// initialize the modal for the alarm
-const alarmModal = document.querySelector(".modal");
-const instances = M.Modal.init(alarmModal);
+// // initialize the modal for the alarm
+// const alarmModal = document.querySelector(".modal");
+// const instances = M.Modal.init(alarmModal);
 
-// IEEF fucntion to call on DOM load
+// IEEF function to call on DOM load
 (function() {
   function dropDown(e) {
     let stuff = e.target.value;
     console.log(stuff);
   }
-
-
 
   // listen for change in select value, and call dropDown()
   document
@@ -50,7 +49,7 @@ function startTheClock(duration) {
 
     // does the same job as parseInt truncates the float
     minutes = (diff / 60) | 0;
-    seconds = (diff % 60) | 0;
+    seconds = diff % 60 | 0;
 
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -104,18 +103,15 @@ function adjustTimer(direction) {
     let minutes = parseInt(getTimeArr[0]);
     minutes++;
     timerDisplay.innerText = minutes + ":" + getTimeArr[1];
-  } 
-  else if (direction === "down") {
+  } else if (direction === "down") {
     let minutes = parseInt(getTimeArr[0]);
     minutes--;
     timerDisplay.innerText = minutes + ":" + getTimeArr[1];
-  }
-  else if (direction === "breakUp") {
+  } else if (direction === "breakUp") {
     let minutes = parseInt(getBreakArr[0]);
     minutes++;
     breakDisplay.innerText = minutes + ":" + getBreakArr[1];
-  }
-  else if (direction === "breakDown") {
+  } else if (direction === "breakDown") {
     let minutes = parseInt(getBreakArr[0]);
     minutes--;
     breakDisplay.innerText = minutes + ":" + getBreakArr[1];
