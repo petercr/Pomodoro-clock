@@ -1,27 +1,32 @@
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* .container {
-    height: 100vh;
-} */
+header {
+  display: block;
+  width: 100vw;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  background-color: #ee6e73;
+}
 
 .info {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 .controls {
-    margin-top: 10%;
-    margin-bottom: 15%;
-    padding-bottom: 5%;
+  margin-top: 10%;
+  margin-bottom: 15%;
+  padding-bottom: 5%;
 }
 
 .timer {
-    padding-top: 2%;
+  padding-top: 2%;
 }
 
 .alarms {
-    padding-top: 5%;
+  padding-top: 5%;
 }
