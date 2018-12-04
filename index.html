@@ -19,6 +19,7 @@
   </head>
 
   <body>
+    <header>Pomodoro Clock</header>
     <div class="container">
       <div class="timer center-align" id="timers">
         <h2 id="timer">01:30</h2>
@@ -63,52 +64,60 @@
           </div>
         </div>
         <!-- end of changeButtons -->
-      </div>
-      <!-- end of row -->
 
-      <div class="input-field alarms center" id="alarmOptions">
-        <select class="browser-default">
-          <option value="" disabled selected>Choose your alarm sound</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-        <label>Select Alarm Sound</label>
+        <div class="input-field alarms center" id="alarmOptions">
+          <select class="browser-default">
+            <option value="" disabled selected>Choose your alarm sound</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Select Alarm Sound</label>
+        </div>
+
+        <div class="controls">
+          <a
+            href="#"
+            class="waves-effect waves-light btn left"
+            id="startButton"
+          >
+            <i class="material-icons">play_circle_outline</i>
+            <i class="material-icons">pause_circle_outline</i>
+          </a>
+          <a
+            href="#"
+            class="waves-effect waves-light btn right"
+            id="stopButton"
+          >
+            <i class="material-icons">stop</i>
+            <i class="material-icons">replay</i>
+          </a>
+        </div>
+        <!-- end of controls -->
       </div>
 
-      <div class="controls">
-        <a href="#" class="waves-effect waves-light btn left" id="startButton">
-          <i class="material-icons">play_circle_outline</i>
-          <i class="material-icons">pause_circle_outline</i>
-        </a>
-        <a href="#" class="waves-effect waves-light btn right" id="stopButton">
-          <i class="material-icons">stop</i>
-          <i class="material-icons">replay</i>
-        </a>
-      </div>
-      <!-- end of controls -->
-    </div>
-
-    <!-- Modal to be used when alarm() is called -->
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <h4>Alarm Time ⏰</h4>
-        <p>
-          Choose to either turn off the alarm, or to turn of the alarm and start
-          the break timer
-        </p>
-      </div>
-      <div class="modal-footer">
-        <a
-          href="#!"
-          class=" modal-action modal-close waves-effect waves-red btn-flat"
-          >Stop Alarm</a
-        >
-        <a
-          href="#!"
-          class=" modal-action modal-close waves-effect waves-green btn-flat"
-          >Stop Alarm &amp; Start Break</a
-        >
+      <!-- Modal to be used when alarm() is called -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Alarm Time ⏰</h4>
+          <p>
+            Choose to either turn off the alarm, or to turn of the alarm and
+            start the break timer
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a
+            href="#!"
+            class=" modal-action modal-close waves-effect waves-red btn-flat"
+            >Stop Alarm</a
+          >
+          <a
+            href="#!"
+            class=" modal-action modal-close waves-effect waves-green btn-flat"
+            >Stop Alarm &amp; Start Break</a
+          >
+        </div>
+        <!-- end of row -->
       </div>
     </div>
 
