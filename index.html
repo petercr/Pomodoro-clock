@@ -21,12 +21,26 @@
   <body>
     <header>Pomodoro Clock</header>
     <div class="container">
-      <div class="timer center-align" id="timers">
-        <h2 id="timer">01:30</h2>
-        <h2 id="breakTimer">5:00</h2>
+      <div class="center-align" id="timers">
+        <h6 id="timer">01:30</h6>
+        <h6 id="breakTimer">5:00</h6>
       </div>
       <div class="row">
+        <div class="col s12">
+          <p class="center" id="timer-displayed">Session</p>
+          <p class="center" id="time-display">25:00</p>
+        </div>
         <div class="col s12 info">
+          <div class="timers">
+            <div id="session-label">
+              <h6>Session Length</h6>
+              <h6>25</h6>
+            </div>
+            <div id="break-label">
+              <h6>Break Length</h6>
+              <h6>5</h6>
+            </div>
+          </div>
           <h6 class="left">Up/Down For Timer</h6>
           <h6 class="right">Up/Down for Break</h6>
         </div>
