@@ -23,10 +23,17 @@ header {
   padding-bottom: 5%;
 }
 
-.timer {
-  padding-top: 2%;
+.timers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .alarms {
-  padding-top: 5%;
+  /* padding-top: 5%; */
+}
+
+/* Styling by ID */
+#alarmOptions {
+  padding-top: 50px;
 }
