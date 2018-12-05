@@ -32,13 +32,13 @@
         </div>
         <div class="col s12 info">
           <div class="timers">
-            <div id="session-label">
-              <h6>Session Length</h6>
-              <h6>25</h6>
+            <div>
+              <h6 id="session-label">Session Length</h6>
+              <h6 id="session-length">25</h6>
             </div>
-            <div id="break-label">
-              <h6>Break Length</h6>
-              <h6>5</h6>
+            <div>
+              <h6 id="break-label">Break Length</h6>
+              <h6 id="break-length">5</h6>
             </div>
           </div>
           <h6 class="left">Up/Down For Timer</h6>
@@ -48,14 +48,14 @@
           <div class="leftSide left">
             <a
               href="#"
-              id="timerUp"
+              id="session-increment"
               class="waves-effect waves-light btn"
               onclick="adjustTimer('up')"
               ><i class="material-icons">arrow_upward</i></a
             >
             <a
               href="#"
-              id="timerDown"
+              id="session-decrement"
               class="waves-effect waves-light btn"
               onclick="adjustTimer('down')"
               ><i class="material-icons">arrow_downward</i></a
@@ -65,12 +65,14 @@
           <div class="rightSide right">
             <a
               href="#"
+              id="break-increment"
               class="waves-effect waves-light btn"
               onclick="adjustTimer('breakUp')"
               ><i class="material-icons">arrow_upward</i></a
             >
             <a
               href="#"
+              id="break-decrement"
               class="waves-effect waves-light btn"
               onclick="adjustTimer('breakDown')"
               ><i class="material-icons">arrow_downward</i></a
@@ -96,14 +98,14 @@
             id="startButton"
           >
             <i class="material-icons">play_circle_outline</i>
-            <i class="material-icons">pause_circle_outline</i>
+            <i class="material-icons">stop</i>
           </a>
           <a
             href="#"
             class="waves-effect waves-light btn right"
             id="stopButton"
           >
-            <i class="material-icons">stop</i>
+            <i class="material-icons">replay</i>
             <i class="material-icons">replay</i>
           </a>
         </div>
