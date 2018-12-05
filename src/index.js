@@ -3,13 +3,6 @@ let timer = 25 * 60;
 let breakTimer = 5 * 60;
 
 M.AutoInit();
-// // initialize the drop down menu from Materialize CSS
-// const alarmSounds = document.querySelectorAll("select");
-// const alarmSelection = M.FormSelect.init(alarmSounds, "active");
-
-// // initialize the modal for the alarm
-// const alarmModal = document.querySelector(".modal");
-// const instances = M.Modal.init(alarmModal);
 
 // IEEF function to call on DOM load
 (function() {
@@ -17,11 +10,6 @@ M.AutoInit();
     let stuff = e.target.value;
     console.log(stuff);
   }
-
-  // listen for change in select value, and call dropDown()
-  document
-    .querySelector(".browser-default")
-    .addEventListener("change", dropDown);
 
   // add event listener for the start button
   document.querySelector("#startButton").addEventListener("click", () => {
@@ -34,6 +22,7 @@ M.AutoInit();
   });
 })();
 
+// function to start the clock timer
 function startTheClock(duration) {
   let start = Date.now(),
     diff,
