@@ -2,11 +2,18 @@
 let timer = 25 * 60;
 let breakTimer = 5 * 60;
 
+const timeKeeper = {
+  minutes: 25,
+  seconds: 0
+};
+
 M.AutoInit();
+const alarmSelect = document.querySelectorAll("select");
+const instances = M.FormSelect.init(alarmSelect);
 
 // IEEF function to call on DOM load
 (function() {
-  function dropDown(e) {
+  function instances(e) {
     let stuff = e.target.value;
     console.log(stuff);
   }
