@@ -12,12 +12,28 @@ class App extends Component {
       selection: "Session"
     };
   }
+
   render() {
+    function Timer(props) {
+      const { timer, minutes, seconds } = props;
+
+      return (
+        <div>
+          <p>{timer}</p>
+          <p>
+            {minutes}:{seconds}
+          </p>
+        </div>
+      );
+    }
+
+    const { minutes, seconds, selection } = this.state.timer;
     return (
       <div className="App">
         <header className="App-header">
           <h1>Pomodoro Clock</h1>
         </header>
+        <Timer timer="Session" minutes={minutes} seconds={seconds} />
         <div>
           <p>{this.state.selection}</p>
           <p>
