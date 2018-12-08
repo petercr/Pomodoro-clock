@@ -9,6 +9,10 @@ class App extends Component {
         minutes: "25",
         seconds: "00"
       },
+      break: {
+        minutes: "5",
+        seconds: "00"
+      },
       selection: "Session"
     };
   }
@@ -27,19 +31,30 @@ class App extends Component {
       );
     }
 
-    const { minutes, seconds, selection } = this.state.timer;
+    const { minutes, seconds } = this.state.timer;
     return (
       <div className="App">
         <header className="App-header">
           <h1>Pomodoro Clock</h1>
         </header>
-        <Timer timer="Session" minutes={minutes} seconds={seconds} />
-        <div>
+        <div className="top-panels">
+          <Timer
+            timer={this.state.selection}
+            minutes={minutes}
+            seconds={seconds}
+          />
+          <Timer
+            timer="Break"
+            minutes={this.state.break.minutes}
+            seconds={this.state.break.seconds}
+          />
+        </div>
+        {/* <div>
           <p>{this.state.selection}</p>
           <p>
             {this.state.timer.minutes}:{this.state.timer.seconds}
           </p>
-        </div>
+        </div> */}
       </div>
     );
   }
