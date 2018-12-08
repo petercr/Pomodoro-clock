@@ -49,12 +49,6 @@ class App extends Component {
             seconds={this.state.break.seconds}
           />
         </div>
-        {/* <div>
-          <p>{this.state.selection}</p>
-          <p>
-            {this.state.timer.minutes}:{this.state.timer.seconds}
-          </p>
-        </div> */}
       </div>
     );
   }
