@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import "material-design-icons";
 
 class App extends Component {
   constructor() {
@@ -27,6 +28,9 @@ class App extends Component {
           <p>
             {minutes}:{seconds}
           </p>
+          <button className="btn">
+            <i className="material-icons">up</i>
+          </button>
         </div>
       );
     }
