@@ -20,7 +20,15 @@ class App extends Component {
 
   render() {
     function Timer(props) {
-      const { timer, minutes, seconds } = props;
+      const { timer, minutes, seconds, id1, id2 } = props;
+      let upButtonId, downButtonId;
+      if (timer === "Session Length") {
+        upButtonId = "session-increment";
+        downButtonId = "session-decrement";
+      } else {
+        upButtonId = "break-increment";
+        downButtonId = "break-decrement";
+      }
       const buttonStyle = {
         display: "block",
         margin: "5px",
@@ -29,13 +37,17 @@ class App extends Component {
 
       return (
         <div>
-          <p>{timer}</p>
-          <p>
+          <p id={id1}>{timer}</p>
+          <p id={id2}>
             {minutes}:{seconds}
           </p>
           <div style={buttonStyle} />
-          <button className="btn">up</button>
-          <button className="btn">down</button>
+          <button id={upButtonId} className="btn">
+            up
+          </button>
+          <button id={downButtonId} className="btn">
+            down
+          </button>
         </div>
       );
     }
@@ -48,14 +60,18 @@ class App extends Component {
         </header>
         <div className="top-panels">
           <Timer
-            timer={this.state.selection}
+            timer="Session Length"
             minutes={minutes}
             seconds={seconds}
+            id1="session-label"
+            id2="session-length"
           />
           <Timer
-            timer="Break"
+            timer="Break Length"
             minutes={this.state.break.minutes}
             seconds={this.state.break.seconds}
+            id1="break-label"
+            id2="break-length"
           />
         </div>
         <div className="main-timer">
