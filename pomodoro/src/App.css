@@ -1,3 +1,9 @@
+/* Global Styling */
+button {
+  padding-top: 10px;
+}
+
+/* Styling by class */
 .App {
   text-align: center;
 }
@@ -7,4 +13,8 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
+}
+
+.button-area {
+  padding-bottom: 20px;
 }
