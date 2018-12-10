@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     function Timer(props) {
-      const { timer, minutes, seconds, id1, id2 } = props;
+      const { timer, minutes, id1, id2 } = props;
       let upButtonId, downButtonId;
       if (timer === "Session Length") {
         upButtonId = "session-increment";
@@ -38,9 +38,7 @@ class App extends Component {
       return (
         <div>
           <p id={id1}>{timer}</p>
-          <p id={id2}>
-            {minutes}:{seconds}
-          </p>
+          <p id={id2}>{minutes}</p>
           <div style={buttonStyle} />
           <button id={upButtonId} className="btn">
             up
@@ -52,7 +50,6 @@ class App extends Component {
       );
     }
 
-    const { minutes, seconds } = this.state.timer;
     return (
       <div className="App">
         <header className="App-header">
@@ -61,28 +58,30 @@ class App extends Component {
         <div className="top-panels">
           <Timer
             timer="Session Length"
-            minutes={minutes}
-            seconds={seconds}
+            minutes={this.state.timer.minutes}
             id1="session-label"
             id2="session-length"
           />
           <Timer
             timer="Break Length"
             minutes={this.state.break.minutes}
-            seconds={this.state.break.seconds}
             id1="break-label"
             id2="break-length"
           />
         </div>
         <div className="main-timer">
           {/* This will swap between timers */}
-          <h2>{this.state.selection}</h2>
-          <p>
+          <h2 id="timer-label">{this.state.selection}</h2>
+          <p id="time-left">
             {/* This will display the active timer */}
             {this.state.timer.minutes}:{this.state.timer.seconds}
           </p>
         </div>
-        <div className="button-area">{/* Lots of control buttons */}</div>
+        <div className="button-area">
+          <button id="start_stop">start/stop</button>
+          <button id="reset">reset</button>
+        </div>
+        <audio controls src="" id="beep" />
       </div>
     );
   }
