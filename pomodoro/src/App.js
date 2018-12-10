@@ -21,6 +21,11 @@ class App extends Component {
   render() {
     function Timer(props) {
       const { timer, minutes, seconds } = props;
+      const buttonStyle = {
+        display: "block",
+        margin: "5px",
+        padding: "10px"
+      };
 
       return (
         <div>
@@ -28,9 +33,9 @@ class App extends Component {
           <p>
             {minutes}:{seconds}
           </p>
-          <button className="btn">
-            <i className="material-icons">up</i>
-          </button>
+          <div style={buttonStyle} />
+          <button className="btn">up</button>
+          <button className="btn">down</button>
         </div>
       );
     }
@@ -53,6 +58,15 @@ class App extends Component {
             seconds={this.state.break.seconds}
           />
         </div>
+        <div className="main-timer">
+          {/* This will swap between timers */}
+          <h2>{this.state.selection}</h2>
+          <p>
+            {/* This will display the active timer */}
+            {this.state.timer.minutes}:{this.state.timer.seconds}
+          </p>
+        </div>
+        <div className="button-area">{/* Lots of control buttons */}</div>
       </div>
     );
   }
