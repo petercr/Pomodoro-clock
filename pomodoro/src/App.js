@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import "material-design-icons";
+// eslint-disable-next-line
+import MaterialIcon, { colorPalette } from "material-icons-react";
 
 class App extends Component {
   constructor() {
@@ -41,10 +42,10 @@ class App extends Component {
           <p id={id2}>{minutes}</p>
           <div style={buttonStyle} />
           <button id={upButtonId} className="btn">
-            up
+            <MaterialIcon icon="arrow_upward" />
           </button>
           <button id={downButtonId} className="btn">
-            down
+            <MaterialIcon icon="arrow_downward" />
           </button>
         </div>
       );
@@ -78,8 +79,13 @@ class App extends Component {
           </p>
         </div>
         <div className="button-area">
-          <button id="start_stop">start/stop</button>
-          <button id="reset">reset</button>
+          <button id="start_stop">
+            <MaterialIcon icon="play_arrow" />
+            <MaterialIcon icon="pause_circle_outline" />
+          </button>
+          <button id="reset">
+            <MaterialIcon icon="loop" />
+          </button>
         </div>
         <audio controls src="" id="beep" />
       </div>
