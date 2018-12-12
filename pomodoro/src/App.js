@@ -9,15 +9,21 @@ class App extends Component {
     super();
     this.state = {
       timer: {
-        minutes: "25",
-        seconds: "00"
+        minutes: 25,
+        seconds: 0
       },
       break: {
-        minutes: "5",
-        seconds: "00"
+        minutes: 5,
+        seconds: 0
       },
       selection: "Session"
     };
+
+    this.increment = this.increment.bind(this);
+  }
+
+  increment() {
+    console.log("hello");
   }
 
   render() {
@@ -32,6 +38,7 @@ class App extends Component {
             minutes={this.state.timer.minutes}
             id1="session-label"
             id2="session-length"
+            onClick={this.increment}
           />
           <Timer
             timer="Break Length"
@@ -45,11 +52,14 @@ class App extends Component {
           <h2 id="timer-label">{this.state.selection}</h2>
           <p id="time-left">
             {/* This will display the active timer */}
-            {this.state.timer.minutes}:{this.state.timer.seconds}
+            {this.state.timer.minutes}:
+            {this.state.timer.seconds > 9
+              ? this.state.timer.seconds
+              : "0" + this.state.timer.seconds}
           </p>
         </div>
         <div className="button-area">
-          <button id="start_stop">
+          <button id="start_stop" onClick={this.increment}>
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
