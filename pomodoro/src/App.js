@@ -19,6 +19,7 @@ class App extends Component {
     };
 
     this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
   }
 
   increment(timer) {
@@ -27,6 +28,10 @@ class App extends Component {
       const { seconds } = this.state.timer;
       console.log(timer.currentTarget.id);
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
+    } else {
+      const newMins = this.state.break.minutes + 1;
+      const seconds = this.state.break.seconds;
+      this.setState({ break: { minutes: newMins, seconds: seconds } });
     }
   }
 
@@ -34,8 +39,12 @@ class App extends Component {
     if (timer.currentTarget.id === "session-decrement") {
       let newMins = this.state.timer.minutes - 1;
       const { seconds } = this.state.timer;
-      console.log(timer.currentTarget.id);
+      // console.log(timer.currentTarget.id);
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
+    } else {
+      const newMins = this.state.break.minutes - 1;
+      const seconds = this.state.break.seconds;
+      this.setState({ break: { minutes: newMins, seconds: seconds } });
     }
   }
 
@@ -72,10 +81,18 @@ class App extends Component {
             <p id="break-label">Break Length</p>
             <p id="break-length">{this.state.break.minutes}</p>
             <div className="button-style" />
-            <button id="break-increment" className="btn">
+            <button
+              id="break-increment"
+              className="btn"
+              onClick={e => this.increment(e)}
+            >
               <MaterialIcon icon="arrow_upward" />
             </button>
-            <button id="break-decrement" className="btn">
+            <button
+              id="break-decrement"
+              className="btn"
+              onClick={e => this.decrement(e)}
+            >
               <MaterialIcon icon="arrow_downward" />
             </button>
           </div>
