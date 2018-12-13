@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 // eslint-disable-next-line
 import MaterialIcon, { colorPalette } from "material-icons-react";
-import Timer from "./components/Timer";
 
 class App extends Component {
   constructor() {
@@ -22,11 +21,21 @@ class App extends Component {
     this.increment = this.increment.bind(this);
   }
 
-  increment() {
-    if (this.state.selection === "Session") {
-      let count = this.state.timer.minutes + 1;
-      console.log("hello");
-      this.setState({ timer: { minutes: count } });
+  increment(timer) {
+    if (timer.currentTarget.id === "session-increment") {
+      let newMins = this.state.timer.minutes + 1;
+      const { seconds } = this.state.timer;
+      console.log(timer.currentTarget.id);
+      this.setState({ timer: { minutes: newMins, seconds: seconds } });
+    }
+  }
+
+  decrement(timer) {
+    if (timer.currentTarget.id === "session-decrement") {
+      let newMins = this.state.timer.minutes - 1;
+      const { seconds } = this.state.timer;
+      console.log(timer.currentTarget.id);
+      this.setState({ timer: { minutes: newMins, seconds: seconds } });
     }
   }
 
@@ -36,21 +45,43 @@ class App extends Component {
         <header className="App-header">
           <h1>Pomodoro Clock</h1>
         </header>
+        {/* Top part to hold clock times and adjust buttons */}
         <div className="top-panels">
-          <Timer
-            timer="Session Length"
-            minutes={this.state.timer.minutes}
-            id1="session-label"
-            id2="session-length"
-            onClick={this.increment}
-          />
-          <Timer
-            timer="Break Length"
-            minutes={this.state.break.minutes}
-            id1="break-label"
-            id2="break-length"
-          />
+          <div>
+            {/* Session Timer Adjust */}
+            <p id="session-label">Session Length</p>
+            <p id="session-length">{this.state.timer.minutes}</p>
+            <div className="button-style" />
+            <button
+              id="session-increment"
+              className="btn"
+              onClick={e => this.increment(e)}
+            >
+              <MaterialIcon icon="arrow_upward" />
+            </button>
+            <button
+              id="session-decrement"
+              className="btn"
+              onClick={e => this.decrement(e)}
+            >
+              <MaterialIcon icon="arrow_downward" />
+            </button>
+          </div>
+          <div>
+            {/* Break Timer Adjust */}
+            <p id="break-label">Break Length</p>
+            <p id="break-length">{this.state.break.minutes}</p>
+            <div className="button-style" />
+            <button id="break-increment" className="btn">
+              <MaterialIcon icon="arrow_upward" />
+            </button>
+            <button id="break-decrement" className="btn">
+              <MaterialIcon icon="arrow_downward" />
+            </button>
+          </div>
         </div>
+
+        {/* Where the clock gets displayed */}
         <div className="main-timer">
           {/* This will swap between timers */}
           <h2 id="timer-label">{this.state.selection}</h2>
@@ -62,6 +93,8 @@ class App extends Component {
               : "0" + this.state.timer.seconds}
           </p>
         </div>
+
+        {/* Play/pause and reset buttons */}
         <div className="button-area">
           <button id="start_stop" onClick={this.increment}>
             <MaterialIcon icon="play_arrow" />
