@@ -23,7 +23,11 @@ class App extends Component {
   }
 
   increment() {
-    console.log("hello");
+    if (this.state.selection === "Session") {
+      let count = this.state.timer.minutes + 1;
+      console.log("hello");
+      this.setState({ timer: { minutes: count } });
+    }
   }
 
   render() {
