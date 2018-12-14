@@ -170,7 +170,7 @@ class App extends Component {
 
         {/* Play/pause and reset buttons */}
         <div className="button-area">
-          <button id="start_stop" onClick={this.startTheClock}>
+          <button id="start_stop" onClick={() => this.startTheClock(this)}>
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
