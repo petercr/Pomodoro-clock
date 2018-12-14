@@ -21,6 +21,7 @@ class App extends Component {
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
+    this.startTheClock = this.startTheClock.bind(this);
   }
 
   increment(timer) {
@@ -52,6 +53,56 @@ class App extends Component {
   resetTimer() {
     this.setState({ timer: { minutes: 25, seconds: 0 } });
     this.setState({ break: { minutes: 5, seconds: 0 } });
+  }
+
+  startTheClock() {
+    let duration = this.state.timer.minutes * 60;
+    duration += this.state.timer.seconds;
+    let start = Date.now(),
+      diff,
+      minutes,
+      seconds;
+
+    function timer() {
+      // get the number of seconds that have elapsed since
+      // startTimer() was called
+      diff = duration - (((Date.now() - start) / 1000) | 0);
+
+      // does the same job as parseInt truncates the float
+      minutes = (diff / 60) | 0;
+      seconds = diff % 60 | 0;
+
+      // Logic to add zero in front of single digits
+      // minutes = minutes < 10 ? "0" + minutes : minutes;
+      // seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      console.log(this);
+
+      // this.setState({ timer: { minutes: minutes, seconds: seconds } });
+
+      if (diff <= 0) {
+        // add one second so that the count down starts at the full duration
+        // example 05:00 not 04:59
+        start = Date.now() + 1000;
+      }
+    }
+    // we don't want to wait a full second before the timer starts
+    timer();
+    window.setInterval(timer, 1000);
+    window.setTimeout(this.alarm, duration * 1000);
+
+    // add event listener for the stop button
+    // document
+    //   .querySelector("#stopButton")
+    //   .addEventListener("click", function(theClock) {
+    //     //   stopTheClock(theClock);
+    //     window.clearInterval(mainTimer);
+    //     window.clearTimeout(alarmTimer);
+    //   });
+  } // end of timer()
+
+  alarm() {
+    alert("times up");
   }
 
   render() {
@@ -119,7 +170,7 @@ class App extends Component {
 
         {/* Play/pause and reset buttons */}
         <div className="button-area">
-          <button id="start_stop" onClick={this.increment}>
+          <button id="start_stop" onClick={this.startTheClock}>
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
