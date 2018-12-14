@@ -20,6 +20,7 @@ class App extends Component {
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
   }
 
   increment(timer) {
@@ -46,6 +47,11 @@ class App extends Component {
       const seconds = this.state.break.seconds;
       this.setState({ break: { minutes: newMins, seconds: seconds } });
     }
+  }
+
+  resetTimer() {
+    this.setState({ timer: { minutes: 25, seconds: 0 } });
+    this.setState({ break: { minutes: 5, seconds: 0 } });
   }
 
   render() {
@@ -117,7 +123,7 @@ class App extends Component {
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
-          <button id="reset">
+          <button id="reset" onClick={this.resetTimer}>
             <MaterialIcon icon="loop" />
           </button>
         </div>
