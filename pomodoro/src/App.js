@@ -8,7 +8,7 @@ class App extends Component {
     super();
     this.state = {
       timer: {
-        minutes: 25,
+        minutes: 1,
         seconds: 0
       },
       break: {
@@ -71,12 +71,11 @@ class App extends Component {
       // does the same job as parseInt truncates the float
       minutes = (diff / 60) | 0;
       seconds = diff % 60 | 0;
+      console.log(this);
 
       // Logic to add zero in front of single digits
       // minutes = minutes < 10 ? "0" + minutes : minutes;
       // seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      console.log(this);
 
       // this.setState({ timer: { minutes: minutes, seconds: seconds } });
 
@@ -89,7 +88,7 @@ class App extends Component {
     // we don't want to wait a full second before the timer starts
     timer();
     window.setInterval(timer, 1000);
-    window.setTimeout(this.alarm, duration * 1000);
+    window.setTimeout(this.alarm, duration);
 
     // add event listener for the stop button
     // document
@@ -106,6 +105,10 @@ class App extends Component {
   }
 
   render() {
+    const timerMins = this.state.timer.minutes;
+    const timerSecs = this.state.timer.seconds;
+    const breakMins = this.state.break.minutes;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -116,7 +119,7 @@ class App extends Component {
           <div>
             {/* Session Timer Adjust */}
             <p id="session-label">Session Length</p>
-            <p id="session-length">{this.state.timer.minutes}</p>
+            <p id="session-length">{timerMins}</p>
             <div className="button-style" />
             <button
               id="session-increment"
@@ -136,7 +139,7 @@ class App extends Component {
           <div>
             {/* Break Timer Adjust */}
             <p id="break-label">Break Length</p>
-            <p id="break-length">{this.state.break.minutes}</p>
+            <p id="break-length">{breakMins}</p>
             <div className="button-style" />
             <button
               id="break-increment"
@@ -161,10 +164,7 @@ class App extends Component {
           <h2 id="timer-label">{this.state.selection}</h2>
           <p id="time-left">
             {/* This will display the active timer */}
-            {this.state.timer.minutes}:
-            {this.state.timer.seconds > 9
-              ? this.state.timer.seconds
-              : "0" + this.state.timer.seconds}
+            {timerMins}:{timerSecs > 9 ? timerSecs : "0" + timerSecs}
           </p>
         </div>
 
