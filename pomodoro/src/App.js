@@ -22,6 +22,7 @@ class App extends Component {
     this.decrement = this.decrement.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.startTheClock = this.startTheClock.bind(this);
+    this.timer = this.timer.bind(this);
   }
 
   increment(timer) {
@@ -59,51 +60,52 @@ class App extends Component {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
     let start = Date.now();
-    const State = this;
 
-    console.log(this.state);
+    console.log(duration, start);
 
-    const timer = (start, State) => {
-      let diff, minutes, seconds;
-      // get the number of seconds that have elapsed since
-      // startTimer() was called
-      diff = duration - (((Date.now() - start) / 1000) | 0);
-
-      // does the same job as parseInt truncates the float
-      minutes = (diff / 60) | 0;
-      seconds = diff % 60 | 0;
-
-      // Logic to add zero in front of single digits
-      // minutes = minutes < 10 ? "0" + minutes : minutes;
-      // seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      State.setState({
-        timer: { minutes: minutes, seconds: seconds }
-      });
-
-      if (diff <= 0) {
-        // add one second so that the count down starts at the full duration
-        // example 05:00 not 04:59
-        start = Date.now() + 1000;
-      }
-    };
     // we don't want to wait a full second before the timer starts
-    timer(start, State);
-    window.setInterval(timer, 1000);
-    window.setTimeout(this.alarm, duration);
+    this.timer(start, duration);
+    //eslint-disable-next-line
+    let mainTimer = window.setInterval(this.timer(start, duration), 1000);
+    //eslint-disable-next-line
+    let alarmTimer = window.setTimeout(this.alarm, duration * 1000);
 
     // add event listener for the stop button
-    // document
-    //   .querySelector("#stopButton")
-    //   .addEventListener("click", function(theClock) {
-    //     //   stopTheClock(theClock);
-    //     window.clearInterval(mainTimer);
-    //     window.clearTimeout(alarmTimer);
-    //   });
+    document.querySelector("#start_stop").addEventListener("click", () => {
+      this.alarm();
+      // window.clearInterval(mainTimer);
+      // window.clearTimeout(alarmTimer);
+    });
   } // end of timer()
+
+  timer(start, duration) {
+    console.log(this);
+
+    let diff, minutes, seconds;
+    // get the number of seconds that have elapsed since
+    // startTimer() was called
+    diff = duration - (((Date.now() - start) / 1000) | 0);
+
+    // does the same job as parseInt truncates the float
+    minutes = parseInt(minutes / 60) | 0;
+    seconds = parseInt(seconds % 60) | 0;
+
+    // Logic to add zero in front of single digits
+    // minutes = minutes < 10 ? "0" + minutes : minutes;
+    // seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    this.setState({ timer: { minutes: minutes, seconds: seconds } });
+
+    if (diff <= 0) {
+      // add one second so that the count down starts at the full duration
+      // example 05:00 not 04:59
+      start = Date.now() + 1000;
+    }
+  }
 
   alarm() {
     alert("times up");
+    window.clearInterval();
   }
 
   render() {
