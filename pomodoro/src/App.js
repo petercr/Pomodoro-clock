@@ -58,12 +58,13 @@ class App extends Component {
   startTheClock() {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
-    let start = Date.now(),
-      diff,
-      minutes,
-      seconds;
+    let start = Date.now();
+    const State = this;
 
-    function timer() {
+    console.log(this.state);
+
+    const timer = (start, State) => {
+      let diff, minutes, seconds;
       // get the number of seconds that have elapsed since
       // startTimer() was called
       diff = duration - (((Date.now() - start) / 1000) | 0);
@@ -71,22 +72,23 @@ class App extends Component {
       // does the same job as parseInt truncates the float
       minutes = (diff / 60) | 0;
       seconds = diff % 60 | 0;
-      console.log(this);
 
       // Logic to add zero in front of single digits
       // minutes = minutes < 10 ? "0" + minutes : minutes;
       // seconds = seconds < 10 ? "0" + seconds : seconds;
 
-      // this.setState({ timer: { minutes: minutes, seconds: seconds } });
+      State.setState({
+        timer: { minutes: minutes, seconds: seconds }
+      });
 
       if (diff <= 0) {
         // add one second so that the count down starts at the full duration
         // example 05:00 not 04:59
         start = Date.now() + 1000;
       }
-    }
+    };
     // we don't want to wait a full second before the timer starts
-    timer();
+    timer(start, State);
     window.setInterval(timer, 1000);
     window.setTimeout(this.alarm, duration);
 
@@ -164,7 +166,8 @@ class App extends Component {
           <h2 id="timer-label">{this.state.selection}</h2>
           <p id="time-left">
             {/* This will display the active timer */}
-            {timerMins}:{timerSecs > 9 ? timerSecs : "0" + timerSecs}
+            {timerMins > 9 ? timerMins : "0" + timerMins}:
+            {timerSecs > 9 ? timerSecs : "0" + timerSecs}
           </p>
         </div>
 
