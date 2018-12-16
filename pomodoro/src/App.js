@@ -23,6 +23,7 @@ class App extends Component {
     this.resetTimer = this.resetTimer.bind(this);
     this.startTheClock = this.startTheClock.bind(this);
     this.timer = this.timer.bind(this);
+    this.updateClock = this.updateClock.bind(this);
   }
 
   increment(timer) {
@@ -56,6 +57,10 @@ class App extends Component {
     this.setState({ break: { minutes: 5, seconds: 0 } });
   }
 
+  updateClock(mins, secs) {
+    this.setState({ timer: { minutes: mins, seconds: secs } });
+  }
+
   startTheClock() {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
@@ -64,37 +69,47 @@ class App extends Component {
     console.log(duration, start);
 
     // we don't want to wait a full second before the timer starts
-    this.timer(start, duration);
+    // this.timer(start, duration);
     //eslint-disable-next-line
     let mainTimer = window.setInterval(this.timer(start, duration), 1000);
     //eslint-disable-next-line
-    let alarmTimer = window.setTimeout(this.alarm, duration * 1000);
+    let alarmTimer = window.setTimeout((this.alarm, duration) * 1000);
 
     // add event listener for the stop button
-    document.querySelector("#start_stop").addEventListener("click", () => {
+    document.querySelector("#reset").addEventListener("click", () => {
       this.alarm();
-      // window.clearInterval(mainTimer);
-      // window.clearTimeout(alarmTimer);
+      window.clearInterval(mainTimer);
+      window.clearTimeout(alarmTimer);
     });
   } // end of timer()
 
   timer(start, duration) {
-    console.log(this);
-
-    let diff, minutes, seconds;
+    let minutes = this.state.timer.minutes;
+    let seconds = this.state.timer.seconds;
     // get the number of seconds that have elapsed since
     // startTimer() was called
-    diff = duration - (((Date.now() - start) / 1000) | 0);
+    let diff = duration - (((Date.now() - start) / 1000) | 0);
 
+    console.log(minutes, seconds);
+
+    if (minutes >= 1 && seconds === 0) {
+      minutes--;
+      seconds = 59;
+      this.setState({ timer: { minutes: minutes, seconds: seconds } });
+    } else if (minutes === 0 && seconds === 0) {
+      this.alarm();
+    }
     // does the same job as parseInt truncates the float
-    minutes = parseInt(minutes / 60) | 0;
-    seconds = parseInt(seconds % 60) | 0;
+    // minutes = Math.floor(minutes / 60) | 0;
+    // seconds = Math.floor(seconds % 60) | 0;
+
+    console.log(minutes, seconds);
 
     // Logic to add zero in front of single digits
     // minutes = minutes < 10 ? "0" + minutes : minutes;
     // seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    this.setState({ timer: { minutes: minutes, seconds: seconds } });
+    this.updateClock(minutes, seconds);
 
     if (diff <= 0) {
       // add one second so that the count down starts at the full duration
