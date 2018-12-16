@@ -71,7 +71,10 @@ class App extends Component {
     // we don't want to wait a full second before the timer starts
     // this.timer(start, duration);
     //eslint-disable-next-line
-    let mainTimer = window.setInterval(this.timer(start, duration), 1000);
+    let mainTimer = window.setInterval(
+      (start, duration) => this.timer(start, duration),
+      1000
+    );
     //eslint-disable-next-line
     let alarmTimer = window.setTimeout((this.alarm, duration) * 1000);
 
@@ -92,12 +95,15 @@ class App extends Component {
 
     console.log(minutes, seconds);
 
-    if (minutes >= 1 && seconds === 0) {
+    if (seconds === 0 && minutes >= 1) {
       minutes--;
       seconds = 59;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
     } else if (minutes === 0 && seconds === 0) {
       this.alarm();
+    } else {
+      seconds--;
+      this.setState({ timer: { minutes: minutes, seconds: seconds } });
     }
     // does the same job as parseInt truncates the float
     // minutes = Math.floor(minutes / 60) | 0;
