@@ -18,7 +18,9 @@ class App extends Component {
       selection: "Session",
       hasStarted: false,
       initSessionLength: 1,
-      initBreakLength: 5
+      initBreakLength: 5,
+      clockTimer: null,
+      alarmTimer: null
     };
 
     this.increment = this.increment.bind(this);
@@ -27,6 +29,7 @@ class App extends Component {
     this.startTheClock = this.startTheClock.bind(this);
     this.timer = this.timer.bind(this);
     this.updateClock = this.updateClock.bind(this);
+    this.alarm = this.alarm.bind(this);
   }
 
   increment(timer) {
@@ -76,12 +79,11 @@ class App extends Component {
 
     console.log(duration);
 
-    // we don't want to wait a full second before the timer starts
-    // this.timer(start, duration);
-    //eslint-disable-next-line
-    let mainTimer = window.setInterval(this.timer, 1000);
-    //eslint-disable-next-line
-    let alarmTimer = window.setTimeout(this.alarm, duration * 1000);
+    const mainTimer = window.setInterval(this.timer, 100);
+    this.setState({ clockTimer: mainTimer });
+
+    const alarmTimer = window.setTimeout(this.alarm, duration * 100);
+    this.setState({ alarmTimer: alarmTimer });
 
     // add event listener for the stop button
     document.querySelector("#reset").addEventListener("click", () => {
@@ -115,7 +117,8 @@ class App extends Component {
 
   alarm() {
     alert("times up");
-    window.clearInterval();
+    window.clearInterval(this.state.clockTimer);
+    window.clearTimeout(this.state.alarmTimer);
   }
 
   render() {
