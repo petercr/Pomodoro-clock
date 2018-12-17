@@ -38,9 +38,8 @@ class App extends Component {
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
       this.setState({ initSessionLength: initSession });
     } else {
-      const newMins = this.state.break.minutes + 1;
-      const seconds = this.state.break.seconds;
-      this.setState({ break: { minutes: newMins, seconds: seconds } });
+      const newMins = this.state.initBreakLength + 1;
+      this.setState({ initBreakLength: newMins });
     }
   }
 
@@ -53,15 +52,16 @@ class App extends Component {
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
       this.setState({ initSessionLength: initSession });
     } else {
-      const newMins = this.state.break.minutes - 1;
-      const seconds = this.state.break.seconds;
-      this.setState({ break: { minutes: newMins, seconds: seconds } });
+      const newMins = this.state.initBreakLength - 1;
+      this.setState({ initBreakLength: newMins });
     }
   }
 
   resetTimer() {
     this.setState({ timer: { minutes: 25, seconds: 0 } });
     this.setState({ break: { minutes: 5, seconds: 0 } });
+    this.setState({ initSessionLength: 25 });
+    this.setState({ initBreakLength: 5 });
   }
 
   updateClock(mins, secs) {
