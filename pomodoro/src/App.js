@@ -84,14 +84,7 @@ class App extends Component {
 
     const alarmTimer = window.setTimeout(this.alarm, duration * 100);
     this.setState({ alarmTimer: alarmTimer });
-
-    // add event listener for the stop button
-    document.querySelector("#reset").addEventListener("click", () => {
-      this.alarm();
-      window.clearInterval(mainTimer);
-      window.clearTimeout(alarmTimer);
-    });
-  } // end of timer()
+  }
 
   timer() {
     let minutes = this.state.timer.minutes;
