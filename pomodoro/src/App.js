@@ -15,7 +15,10 @@ class App extends Component {
         minutes: 5,
         seconds: 0
       },
-      selection: "Session"
+      selection: "Session",
+      hasStarted: false,
+      initSessionLength: 1,
+      initBreakLength: 5
     };
 
     this.increment = this.increment.bind(this);
@@ -28,10 +31,12 @@ class App extends Component {
 
   increment(timer) {
     if (timer.currentTarget.id === "session-increment") {
-      let newMins = this.state.timer.minutes + 1;
+      const newMins = this.state.timer.minutes + 1;
       const { seconds } = this.state.timer;
-      console.log(timer.currentTarget.id);
+      const initSession = this.state.initSessionLength + 1;
+
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
+      this.setState({ initSessionLength: initSession });
     } else {
       const newMins = this.state.break.minutes + 1;
       const seconds = this.state.break.seconds;
@@ -41,10 +46,12 @@ class App extends Component {
 
   decrement(timer) {
     if (timer.currentTarget.id === "session-decrement") {
-      let newMins = this.state.timer.minutes - 1;
+      const newMins = this.state.timer.minutes - 1;
       const { seconds } = this.state.timer;
-      // console.log(timer.currentTarget.id);
+      const initSession = this.state.initSessionLength - 1;
+
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
+      this.setState({ initSessionLength: initSession });
     } else {
       const newMins = this.state.break.minutes - 1;
       const seconds = this.state.break.seconds;
@@ -64,19 +71,15 @@ class App extends Component {
   startTheClock() {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
-    let start = Date.now();
 
-    console.log(duration, start);
+    console.log(duration);
 
     // we don't want to wait a full second before the timer starts
     // this.timer(start, duration);
     //eslint-disable-next-line
-    let mainTimer = window.setInterval(
-      (start, duration) => this.timer(start, duration),
-      1000
-    );
+    let mainTimer = window.setInterval(this.timer, 1000);
     //eslint-disable-next-line
-    let alarmTimer = window.setTimeout((this.alarm, duration) * 1000);
+    let alarmTimer = window.setTimeout(this.alarm, duration * 1000);
 
     // add event listener for the stop button
     document.querySelector("#reset").addEventListener("click", () => {
@@ -86,12 +89,9 @@ class App extends Component {
     });
   } // end of timer()
 
-  timer(start, duration) {
+  timer() {
     let minutes = this.state.timer.minutes;
     let seconds = this.state.timer.seconds;
-    // get the number of seconds that have elapsed since
-    // startTimer() was called
-    let diff = duration - (((Date.now() - start) / 1000) | 0);
 
     console.log(minutes, seconds);
 
@@ -105,23 +105,10 @@ class App extends Component {
       seconds--;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
     }
-    // does the same job as parseInt truncates the float
-    // minutes = Math.floor(minutes / 60) | 0;
-    // seconds = Math.floor(seconds % 60) | 0;
 
     console.log(minutes, seconds);
 
-    // Logic to add zero in front of single digits
-    // minutes = minutes < 10 ? "0" + minutes : minutes;
-    // seconds = seconds < 10 ? "0" + seconds : seconds;
-
     this.updateClock(minutes, seconds);
-
-    if (diff <= 0) {
-      // add one second so that the count down starts at the full duration
-      // example 05:00 not 04:59
-      start = Date.now() + 1000;
-    }
   }
 
   alarm() {
@@ -130,9 +117,10 @@ class App extends Component {
   }
 
   render() {
+    const initSession = this.state.initSessionLength;
+    const initBreak = this.state.initBreakLength;
     const timerMins = this.state.timer.minutes;
     const timerSecs = this.state.timer.seconds;
-    const breakMins = this.state.break.minutes;
 
     return (
       <div className="App">
@@ -144,7 +132,7 @@ class App extends Component {
           <div>
             {/* Session Timer Adjust */}
             <p id="session-label">Session Length</p>
-            <p id="session-length">{timerMins}</p>
+            <p id="session-length">{initSession}</p>
             <div className="button-style" />
             <button
               id="session-increment"
@@ -164,7 +152,7 @@ class App extends Component {
           <div>
             {/* Break Timer Adjust */}
             <p id="break-label">Break Length</p>
-            <p id="break-length">{breakMins}</p>
+            <p id="break-length">{initBreak}</p>
             <div className="button-style" />
             <button
               id="break-increment"
