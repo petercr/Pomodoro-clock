@@ -72,6 +72,8 @@ class App extends Component {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
 
+    this.setState({ hasStarted: true });
+
     console.log(duration);
 
     // we don't want to wait a full second before the timer starts
@@ -121,6 +123,7 @@ class App extends Component {
     const initBreak = this.state.initBreakLength;
     const timerMins = this.state.timer.minutes;
     const timerSecs = this.state.timer.seconds;
+    const hasStarted = this.state.hasStarted;
 
     return (
       <div className="App">
@@ -137,14 +140,14 @@ class App extends Component {
             <button
               id="session-increment"
               className="btn"
-              onClick={e => this.increment(e)}
+              onClick={!hasStarted ? e => this.increment(e) : null}
             >
               <MaterialIcon icon="arrow_upward" />
             </button>
             <button
               id="session-decrement"
               className="btn"
-              onClick={e => this.decrement(e)}
+              onClick={!hasStarted ? e => this.decrement(e) : null}
             >
               <MaterialIcon icon="arrow_downward" />
             </button>
@@ -157,14 +160,14 @@ class App extends Component {
             <button
               id="break-increment"
               className="btn"
-              onClick={e => this.increment(e)}
+              onClick={!hasStarted ? e => this.increment(e) : null}
             >
               <MaterialIcon icon="arrow_upward" />
             </button>
             <button
               id="break-decrement"
               className="btn"
-              onClick={e => this.decrement(e)}
+              onClick={!hasStarted ? e => this.decrement(e) : null}
             >
               <MaterialIcon icon="arrow_downward" />
             </button>
