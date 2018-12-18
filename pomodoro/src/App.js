@@ -30,6 +30,7 @@ class App extends Component {
     this.timer = this.timer.bind(this);
     this.updateClock = this.updateClock.bind(this);
     this.alarm = this.alarm.bind(this);
+    this.pause = this.pause.bind(this);
   }
 
   increment(timer) {
@@ -114,6 +115,12 @@ class App extends Component {
     window.clearTimeout(this.state.alarmTimer);
   }
 
+  pause() {
+    window.clearInterval(this.state.clockTimer);
+    window.clearTimeout(this.state.alarmTimer);
+    this.setState({ hasStarted: false });
+  }
+
   render() {
     const initSession = this.state.initSessionLength;
     const initBreak = this.state.initBreakLength;
@@ -183,7 +190,10 @@ class App extends Component {
 
         {/* Play/pause and reset buttons */}
         <div className="button-area">
-          <button id="start_stop" onClick={() => this.startTheClock(this)}>
+          <button
+            id="start_stop"
+            onClick={!hasStarted ? () => this.startTheClock(this) : this.pause}
+          >
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
