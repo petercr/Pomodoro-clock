@@ -101,7 +101,7 @@ class App extends Component {
 
     console.log(minutes, seconds);
 
-    if (seconds === 0 && minutes >= 1) {
+    if (seconds === 0 && minutes >= 1 && this.state.selection === "Session") {
       minutes--;
       seconds = 59;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
@@ -110,6 +110,17 @@ class App extends Component {
     } else {
       seconds--;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
+    }
+
+    if (seconds === 0 && minutes >= 1) {
+      minutes--;
+      seconds = 59;
+      this.setState({ break: { minutes: minutes, seconds: seconds } });
+    } else if (minutes === 0 && seconds === 0) {
+      this.alarm();
+    } else {
+      seconds--;
+      this.setState({ break: { minutes: minutes, seconds: seconds } });
     }
 
     console.log(minutes, seconds);
