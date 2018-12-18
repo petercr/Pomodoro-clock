@@ -83,13 +83,21 @@ class App extends Component {
     const mainTimer = window.setInterval(this.timer, 100);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.alarm, duration * 100);
+    const alarmTimer = window.setTimeout(this.alarm, duration * 120);
     this.setState({ alarmTimer: alarmTimer });
   }
 
   timer() {
-    let minutes = this.state.timer.minutes;
-    let seconds = this.state.timer.seconds;
+    let minutes =
+      this.state.selection === "Session"
+        ? this.state.timer.minutes
+        : this.state.break.minutes;
+    let seconds =
+      this.state.selection === "Session"
+        ? this.state.timer.seconds
+        : this.state.break.seconds;
+    // let minutes = this.state.timer.minutes;
+    // let seconds = this.state.timer.seconds;
 
     console.log(minutes, seconds);
 
@@ -110,9 +118,10 @@ class App extends Component {
   }
 
   alarm() {
-    alert("times up");
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
+    alert("times up");
+    this.setState({ selection: "Break" });
   }
 
   pause() {
@@ -124,9 +133,17 @@ class App extends Component {
   render() {
     const initSession = this.state.initSessionLength;
     const initBreak = this.state.initBreakLength;
-    const timerMins = this.state.timer.minutes;
-    const timerSecs = this.state.timer.seconds;
     const hasStarted = this.state.hasStarted;
+
+    // Show the time from active timer
+    const display_mins =
+      this.state.selection === "Session"
+        ? this.state.timer.minutes
+        : this.state.break.minutes;
+    const display_secs =
+      this.state.selection === "Session"
+        ? this.state.timer.seconds
+        : this.state.break.seconds;
 
     return (
       <div className="App">
@@ -183,8 +200,8 @@ class App extends Component {
           <h2 id="timer-label">{this.state.selection}</h2>
           <p id="time-left">
             {/* This will display the active timer */}
-            {timerMins > 9 ? timerMins : "0" + timerMins}:
-            {timerSecs > 9 ? timerSecs : "0" + timerSecs}
+            {display_mins > 9 ? display_mins : "0" + display_mins}:
+            {display_secs > 9 ? display_secs : "0" + display_secs}
           </p>
         </div>
 
