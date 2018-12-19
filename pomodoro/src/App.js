@@ -220,12 +220,13 @@ class App extends Component {
         <div className="button-area">
           <button
             id="start_stop"
+            className="btn"
             onClick={!hasStarted ? () => this.startTheClock(this) : this.pause}
           >
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
-          <button id="reset" onClick={this.resetTimer}>
+          <button id="reset" className="btn" onClick={this.resetTimer}>
             <MaterialIcon icon="loop" />
           </button>
         </div>
