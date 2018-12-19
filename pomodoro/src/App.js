@@ -31,6 +31,7 @@ class App extends Component {
     this.updateClock = this.updateClock.bind(this);
     this.alarm = this.alarm.bind(this);
     this.pause = this.pause.bind(this);
+    this.startTheBreak = this.startTheBreak.bind(this);
   }
 
   increment(timer) {
@@ -69,14 +70,24 @@ class App extends Component {
   }
 
   updateClock(mins, secs) {
-    this.setState({ timer: { minutes: mins, seconds: secs } });
+    if (this.state.selection === "Session") {
+      this.setState({ timer: { minutes: mins, seconds: secs } });
+    } else if (this.state.selection === "Break") {
+      this.setState({ break: { minutes: mins, seconds: secs } });
+    }
   }
 
   startTheClock() {
-    let duration = this.state.timer.minutes * 60;
-    duration += this.state.timer.seconds;
-
     this.setState({ hasStarted: true });
+
+    let duration =
+      this.state.selection === "Session"
+        ? this.state.timer.minutes * 60
+        : this.state.break.minutes;
+    duration +=
+      this.state.selection === "Session"
+        ? this.state.timer.seconds
+        : this.state.break.seconds;
 
     console.log(duration);
 
@@ -96,12 +107,8 @@ class App extends Component {
       this.state.selection === "Session"
         ? this.state.timer.seconds
         : this.state.break.seconds;
-    // let minutes = this.state.timer.minutes;
-    // let seconds = this.state.timer.seconds;
 
-    console.log(minutes, seconds);
-
-    if (seconds === 0 && minutes >= 1 && this.state.selection === "Session") {
+    if (this.state.selection === "Session" && seconds === 0 && minutes >= 1) {
       minutes--;
       seconds = 59;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
@@ -112,7 +119,7 @@ class App extends Component {
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
     }
 
-    if (seconds === 0 && minutes >= 1) {
+    if (this.state.selection === "Break" && seconds === 0 && minutes >= 1) {
       minutes--;
       seconds = 59;
       this.setState({ break: { minutes: minutes, seconds: seconds } });
@@ -128,11 +135,32 @@ class App extends Component {
     this.updateClock(minutes, seconds);
   }
 
+  startTheBreak() {
+    this.setState({ hasStarted: true });
+
+    let duration =
+      this.state.selection === "Session"
+        ? this.state.timer.minutes * 60
+        : this.state.break.minutes;
+    duration +=
+      this.state.selection === "Session"
+        ? this.state.timer.seconds
+        : this.state.break.seconds;
+
+    console.log(duration);
+
+    const mainTimer = window.setInterval(this.timer, 100);
+    this.setState({ clockTimer: mainTimer });
+
+    const alarmTimer = window.setTimeout(this.alarm, duration * 120);
+    this.setState({ alarmTimer: alarmTimer });
+  }
+
   alarm() {
+    this.setState({ selection: "Break" });
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     alert("times up");
-    this.setState({ selection: "Break" });
   }
 
   pause() {
