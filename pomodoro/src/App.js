@@ -70,11 +70,13 @@ class App extends Component {
   }
 
   updateClock(mins, secs) {
-    if (this.state.selection === "Session") {
+    const selection = this.state.selection;
+    if (selection === "Session") {
       this.setState({ timer: { minutes: mins, seconds: secs } });
-    } else if (this.state.selection === "Break") {
-      this.setState({ break: { minutes: mins, seconds: secs } });
     }
+    // } else if (selection === "Break") {
+    //   this.setState({ break: { minutes: mins, seconds: secs } });
+    // }
   }
 
   startTheClock() {
@@ -99,16 +101,17 @@ class App extends Component {
   }
 
   timer() {
+    const selection = this.state.selection;
     let minutes =
-      this.state.selection === "Session"
+      selection === "Session"
         ? this.state.timer.minutes
         : this.state.break.minutes;
     let seconds =
-      this.state.selection === "Session"
+      selection === "Session"
         ? this.state.timer.seconds
         : this.state.break.seconds;
 
-    if (this.state.selection === "Session" && seconds === 0 && minutes >= 1) {
+    if (selection === "Session" && seconds === 0 && minutes >= 1) {
       minutes--;
       seconds = 59;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
@@ -117,17 +120,6 @@ class App extends Component {
     } else {
       seconds--;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
-    }
-
-    if (this.state.selection === "Break" && seconds === 0 && minutes >= 1) {
-      minutes--;
-      seconds = 59;
-      this.setState({ break: { minutes: minutes, seconds: seconds } });
-    } else if (minutes === 0 && seconds === 0) {
-      this.alarm();
-    } else {
-      seconds--;
-      this.setState({ break: { minutes: minutes, seconds: seconds } });
     }
 
     console.log(minutes, seconds);
@@ -152,12 +144,13 @@ class App extends Component {
     const mainTimer = window.setInterval(this.timer, 100);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.alarm, duration * 120);
+    const alarmTimer = window.setTimeout(this.alarm, duration * 100);
     this.setState({ alarmTimer: alarmTimer });
   }
 
   alarm() {
     this.setState({ selection: "Break" });
+    // debugger;
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     alert("times up");
