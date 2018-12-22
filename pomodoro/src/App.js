@@ -28,7 +28,6 @@ class App extends Component {
     this.resetTimer = this.resetTimer.bind(this);
     this.startTheClock = this.startTheClock.bind(this);
     this.timer = this.timer.bind(this);
-    this.updateClock = this.updateClock.bind(this);
     this.alarm = this.alarm.bind(this);
     this.pause = this.pause.bind(this);
     this.startTheBreak = this.startTheBreak.bind(this);
@@ -69,16 +68,6 @@ class App extends Component {
     // this.setState({ break: { minutes: 5, seconds: 0 } });
     // this.setState({ initSessionLength: 25 });
     // this.setState({ initBreakLength: 5 });
-  }
-
-  updateClock(mins, secs) {
-    const selection = this.state.selection;
-    if (selection === "Session") {
-      this.setState({ timer: { minutes: mins, seconds: secs } });
-    }
-    // } else if (selection === "Break") {
-    //   this.setState({ break: { minutes: mins, seconds: secs } });
-    // }
   }
 
   startTheClock() {
@@ -127,8 +116,6 @@ class App extends Component {
     }
 
     console.log(minutes, seconds);
-
-    this.updateClock(minutes, seconds);
   }
 
   breakTimer() {
@@ -147,8 +134,6 @@ class App extends Component {
     }
 
     console.log(minutes, seconds);
-
-    // this.updateClock(minutes, seconds);
   }
 
   alarm() {
