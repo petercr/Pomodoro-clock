@@ -100,6 +100,27 @@ class App extends Component {
     this.setState({ alarmTimer: alarmTimer });
   }
 
+  startTheBreak() {
+    this.setState({ hasStarted: true });
+
+    let duration =
+      this.state.selection === "Session"
+        ? this.state.timer.minutes * 60
+        : this.state.break.minutes;
+    duration +=
+      this.state.selection === "Session"
+        ? this.state.timer.seconds
+        : this.state.break.seconds;
+
+    console.log(duration);
+
+    const mainTimer = window.setInterval(this.timer, 100);
+    this.setState({ clockTimer: mainTimer });
+
+    const alarmTimer = window.setTimeout(this.alarm, duration * 100);
+    this.setState({ alarmTimer: alarmTimer });
+  }
+
   timer() {
     const selection = this.state.selection;
     let minutes =
@@ -125,27 +146,6 @@ class App extends Component {
     console.log(minutes, seconds);
 
     this.updateClock(minutes, seconds);
-  }
-
-  startTheBreak() {
-    this.setState({ hasStarted: true });
-
-    let duration =
-      this.state.selection === "Session"
-        ? this.state.timer.minutes * 60
-        : this.state.break.minutes;
-    duration +=
-      this.state.selection === "Session"
-        ? this.state.timer.seconds
-        : this.state.break.seconds;
-
-    console.log(duration);
-
-    const mainTimer = window.setInterval(this.timer, 100);
-    this.setState({ clockTimer: mainTimer });
-
-    const alarmTimer = window.setTimeout(this.alarm, duration * 100);
-    this.setState({ alarmTimer: alarmTimer });
   }
 
   alarm() {
