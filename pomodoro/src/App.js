@@ -8,17 +8,17 @@ class App extends Component {
     super();
     this.state = {
       timer: {
-        minutes: 5,
+        minutes: 1,
         seconds: 0
       },
       break: {
-        minutes: 5,
+        minutes: 1,
         seconds: 0
       },
       selection: "Session",
       hasStarted: false,
-      initSessionLength: 5,
-      initBreakLength: 5,
+      initSessionLength: 1,
+      initBreakLength: 1,
       clockTimer: null,
       alarmTimer: null
     };
@@ -157,9 +157,12 @@ class App extends Component {
   }
 
   alarm() {
+    const beep = document.getElementById("beep");
+
     this.setState({ selection: "Break" });
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
+    beep.play();
     alert("times up");
     this.startTheBreak();
   }
