@@ -8,16 +8,16 @@ class App extends Component {
     super();
     this.state = {
       timer: {
-        minutes: 1,
+        minutes: 5,
         seconds: 0
       },
       break: {
-        minutes: 1,
+        minutes: 5,
         seconds: 0
       },
       selection: "Session",
       hasStarted: false,
-      initSessionLength: 1,
+      initSessionLength: 5,
       initBreakLength: 5,
       clockTimer: null,
       alarmTimer: null
@@ -36,30 +36,50 @@ class App extends Component {
   }
 
   increment(timer) {
-    if (timer.currentTarget.id === "session-increment") {
+    const timerMinutes = this.state.timer.minutes;
+    const breakMinutes = this.state.break.minutes;
+
+    if (timer.currentTarget.id === "session-increment" && timerMinutes < 60) {
       const newMins = this.state.timer.minutes + 1;
       const { seconds } = this.state.timer;
       const initSession = this.state.initSessionLength + 1;
 
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
       this.setState({ initSessionLength: initSession });
-    } else {
-      const newMins = this.state.initBreakLength + 1;
-      this.setState({ initBreakLength: newMins });
+    } else if (
+      timer.currentTarget.id === "break-increment" &&
+      breakMinutes < 60
+    ) {
+      const newMins = this.state.break.minutes + 1;
+      const { seconds } = this.state.break;
+      const initBreak = this.state.initBreakLength + 1;
+
+      this.setState({ break: { minutes: newMins, seconds: seconds } });
+      this.setState({ initBreakLength: initBreak });
     }
   }
 
   decrement(timer) {
-    if (timer.currentTarget.id === "session-decrement") {
+    const timerMinutes = this.state.timer.minutes;
+    const breakMinutes = this.state.break.minutes;
+
+    if (timer.currentTarget.id === "session-decrement" && timerMinutes > 0) {
       const newMins = this.state.timer.minutes - 1;
       const { seconds } = this.state.timer;
       const initSession = this.state.initSessionLength - 1;
 
       this.setState({ timer: { minutes: newMins, seconds: seconds } });
       this.setState({ initSessionLength: initSession });
-    } else {
+    } else if (
+      timer.currentTarget.id === "break-decrement" &&
+      breakMinutes > 0
+    ) {
       const newMins = this.state.initBreakLength - 1;
-      this.setState({ initBreakLength: newMins });
+      const { seconds } = this.state.break;
+      const initBreak = this.state.initBreakLength - 1;
+
+      this.setState({ break: { minutes: newMins, seconds: seconds } });
+      this.setState({ initBreakLength: initBreak });
     }
   }
 
