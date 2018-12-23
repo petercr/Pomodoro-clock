@@ -267,7 +267,10 @@ class App extends Component {
             <MaterialIcon icon="loop" />
           </button>
         </div>
-        <audio controls src="" id="beep" />
+        <audio
+          src="https://storage.cloud.google.com/my-little-alarm-sounds/Short-ringtone-for-notification.mp3?_ga=2.21506491.-1426996322.1544825551"
+          id="beep"
+        />
       </div>
     );
   }
