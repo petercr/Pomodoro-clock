@@ -163,22 +163,28 @@ class App extends Component {
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     beep.play();
-    alert("times up");
-    this.startTheBreak();
+    setTimeout(this.startTheBreak, 1500);
   }
 
   pause() {
+    // Reset the alarm sound to beginning
+    const beep = document.getElementById("beep");
+    beep.currentTime = 0;
+
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     this.setState({ hasStarted: false });
   }
 
   finish() {
+    const beep = document.getElementById("beep");
+
     this.setState({ selection: "Session" });
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
-    alert("times up");
+    beep.play();
     this.resetTimer();
+    setTimeout(this.startTheClock, 1500);
   }
 
   render() {
