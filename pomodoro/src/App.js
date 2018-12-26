@@ -26,6 +26,7 @@ class App extends Component {
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
+    this.setTheClock = this.setTheClock.bind(this);
     this.startTheClock = this.startTheClock.bind(this);
     this.timer = this.timer.bind(this);
     this.alarm = this.alarm.bind(this);
@@ -84,10 +85,30 @@ class App extends Component {
   }
 
   resetTimer() {
+    const beep = document.getElementById("beep");
+    beep.currentTime = 0;
+    beep.pause();
+
+    // Reset everything to 25-5 time
     this.setState({ timer: { minutes: 25, seconds: 0 } });
     this.setState({ break: { minutes: 5, seconds: 0 } });
     this.setState({ initSessionLength: 25 });
     this.setState({ initBreakLength: 5 });
+
+    // Clear any alarms or timers that started
+    window.clearInterval(this.state.clockTimer);
+    window.clearTimeout(this.state.alarmTimer);
+    this.setState({ hasStarted: false });
+
+    this.setState({ selection: "Session" });
+  }
+
+  setTheClock() {
+    const newSession = this.state.initSessionLength;
+    const newBreak = this.state.initBreakLength;
+
+    this.setState({ timer: { minutes: newSession, seconds: 0 } });
+    this.setState({ break: { minutes: newBreak, seconds: 0 } });
   }
 
   startTheClock() {
@@ -167,10 +188,6 @@ class App extends Component {
   }
 
   pause() {
-    // Reset the alarm sound to beginning
-    const beep = document.getElementById("beep");
-    beep.currentTime = 0;
-
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     this.setState({ hasStarted: false });
@@ -183,7 +200,7 @@ class App extends Component {
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     beep.play();
-    this.resetTimer();
+    this.setTheClock();
     setTimeout(this.startTheClock, 1500);
   }
 
