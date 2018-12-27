@@ -64,7 +64,7 @@ class App extends Component {
     const timerMinutes = this.state.timer.minutes;
     const breakMinutes = this.state.break.minutes;
 
-    if (timer.currentTarget.id === "session-decrement" && timerMinutes > 0) {
+    if (timer.currentTarget.id === "session-decrement" && timerMinutes > 1) {
       const newMins = this.state.timer.minutes - 1;
       const { seconds } = this.state.timer;
       const initSession = this.state.initSessionLength - 1;
@@ -73,7 +73,7 @@ class App extends Component {
       this.setState({ initSessionLength: initSession });
     } else if (
       timer.currentTarget.id === "break-decrement" &&
-      breakMinutes > 0
+      breakMinutes > 1
     ) {
       const newMins = this.state.initBreakLength - 1;
       const { seconds } = this.state.break;
