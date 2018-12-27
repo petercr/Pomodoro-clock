@@ -35,6 +35,12 @@ A finished project can be found [here on CodePen](https://codepen.io/freeCodeCam
 - User Story #27: The `audio` element with id="beep" must be 1 second or longer.
 - User Story #28: The `audio` element with id of beep must stop playing and be rewound to the beginning when the element with the id of reset is clicked
 
+### Link to the Unit Testing Script
+The link to the script used to test the project, and ensure that it passes
+all of the required tests is: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+
+#### Additional Information and Contact
+
 A link to the full project description can be found here [Pomodoro Clock Page](https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects/build-a-pomodoro-clock)
 
 Please feel free to contact me if you have any questions or comments. I can be found here on **GitHub** at [PeterCr](https://www.github.com/petercr/)
