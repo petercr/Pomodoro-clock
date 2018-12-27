@@ -7,7 +7,6 @@
 /pomodoro/coverage
 
 # production
-/pomodoro/build
 
 # misc
 .DS_Store
