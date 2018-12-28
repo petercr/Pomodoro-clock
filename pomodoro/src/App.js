@@ -117,7 +117,7 @@ class App extends Component {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
 
-    console.log(duration);
+    // console.log(duration);
 
     const mainTimer = window.setInterval(this.timer, 1000);
     this.setState({ clockTimer: mainTimer });
@@ -132,7 +132,7 @@ class App extends Component {
     let duration = this.state.break.minutes * 60;
     duration += this.state.break.seconds;
 
-    console.log(duration);
+    // console.log(duration);
 
     const mainTimer = window.setInterval(this.breakTimer, 1000);
     this.setState({ clockTimer: mainTimer });
@@ -156,7 +156,7 @@ class App extends Component {
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
     }
 
-    console.log(minutes, seconds);
+    // console.log(minutes, seconds);
   }
 
   breakTimer() {
@@ -174,7 +174,7 @@ class App extends Component {
       this.setState({ break: { minutes: minutes, seconds: seconds } });
     }
 
-    console.log(minutes, seconds);
+    // console.log(minutes, seconds);
   }
 
   alarm() {
