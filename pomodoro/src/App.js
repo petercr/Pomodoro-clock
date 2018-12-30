@@ -3,8 +3,6 @@ import "./App.css";
 // eslint-disable-next-line
 import MaterialIcon, { colorPalette } from "material-icons-react";
 
-// ServiceWorker.register();
-
 class App extends Component {
   constructor() {
     super();
