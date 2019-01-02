@@ -119,10 +119,10 @@ class App extends Component {
 
     // console.log(duration);
 
-    const mainTimer = window.setInterval(this.timer, 1000);
+    const mainTimer = window.setInterval(this.timer, 100);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.alarm, duration * 1000 + 100);
+    const alarmTimer = window.setTimeout(this.alarm, duration * 100 + 100);
     this.setState({ alarmTimer: alarmTimer });
   }
 
@@ -134,10 +134,10 @@ class App extends Component {
 
     // console.log(duration);
 
-    const mainTimer = window.setInterval(this.breakTimer, 1000);
+    const mainTimer = window.setInterval(this.breakTimer, 100);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.finish, duration * 1000 + 100);
+    const alarmTimer = window.setTimeout(this.finish, duration * 100 + 100);
     this.setState({ alarmTimer: alarmTimer });
   }
 
@@ -183,6 +183,8 @@ class App extends Component {
     this.setState({ selection: "Break" });
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
+    this.setState({ clockTimer: null });
+    this.setState({ alarmTimer: null });
     beep.play();
     setTimeout(this.startTheBreak, 1500);
   }
@@ -190,6 +192,9 @@ class App extends Component {
   pause() {
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
+    this.setState({ clockTimer: null });
+    this.setState({ alarmTimer: null });
+
     this.setState({ hasStarted: false });
   }
 
@@ -199,6 +204,8 @@ class App extends Component {
     this.setState({ selection: "Session" });
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
+    this.setState({ clockTimer: null });
+    this.setState({ alarmTimer: null });
     beep.play();
     this.setTheClock();
     setTimeout(this.startTheClock, 1500);
