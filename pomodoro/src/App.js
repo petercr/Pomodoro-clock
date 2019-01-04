@@ -8,17 +8,17 @@ class App extends Component {
     super();
     this.state = {
       timer: {
-        minutes: 25,
+        minutes: 1,
         seconds: 0
       },
       break: {
-        minutes: 5,
+        minutes: 1,
         seconds: 0
       },
       selection: "Session",
       hasStarted: false,
-      initSessionLength: 25,
-      initBreakLength: 5,
+      initSessionLength: 1,
+      initBreakLength: 1,
       clockTimer: null,
       alarmTimer: null
     };
