@@ -8,17 +8,17 @@ class App extends Component {
     super();
     this.state = {
       timer: {
-        minutes: 1,
+        minutes: 25,
         seconds: 0
       },
       break: {
-        minutes: 1,
+        minutes: 5,
         seconds: 0
       },
       selection: "Session",
       hasStarted: false,
-      initSessionLength: 1,
-      initBreakLength: 1,
+      initSessionLength: 25,
+      initBreakLength: 5,
       clockTimer: null,
       alarmTimer: null
     };
@@ -119,10 +119,10 @@ class App extends Component {
 
     // console.log(duration);
 
-    const mainTimer = window.setInterval(this.timer, 100);
+    const mainTimer = window.setInterval(this.timer, 1000);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.alarm, duration * 100 + 100);
+    const alarmTimer = window.setTimeout(this.alarm, duration * 1000 + 100);
     this.setState({ alarmTimer: alarmTimer });
   }
 
@@ -134,10 +134,10 @@ class App extends Component {
 
     // console.log(duration);
 
-    const mainTimer = window.setInterval(this.breakTimer, 100);
+    const mainTimer = window.setInterval(this.breakTimer, 1000);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.finish, duration * 100 + 100);
+    const alarmTimer = window.setTimeout(this.finish, duration * 1000 + 100);
     this.setState({ alarmTimer: alarmTimer });
   }
 
