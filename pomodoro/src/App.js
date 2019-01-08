@@ -37,49 +37,37 @@ class App extends Component {
   }
 
   increment(timer) {
-    const timerMinutes = this.state.timer.minutes;
-    const breakMinutes = this.state.break.minutes;
+    const timerMinutes = this.state.initSessionLength;
+    const breakMinutes = this.state.initBreakLength;
 
     if (timer.currentTarget.id === "session-increment" && timerMinutes < 60) {
-      const newMins = this.state.timer.minutes + 1;
-      const { seconds } = this.state.timer;
       const initSession = this.state.initSessionLength + 1;
 
-      this.setState({ timer: { minutes: newMins, seconds: seconds } });
       this.setState({ initSessionLength: initSession });
     } else if (
       timer.currentTarget.id === "break-increment" &&
       breakMinutes < 60
     ) {
-      const newMins = this.state.break.minutes + 1;
-      const { seconds } = this.state.break;
       const initBreak = this.state.initBreakLength + 1;
 
-      this.setState({ break: { minutes: newMins, seconds: seconds } });
       this.setState({ initBreakLength: initBreak });
     }
   }
 
   decrement(timer) {
-    const timerMinutes = this.state.timer.minutes;
-    const breakMinutes = this.state.break.minutes;
+    const timerMinutes = this.state.initSessionLength;
+    const breakMinutes = this.state.initBreakLength;
 
     if (timer.currentTarget.id === "session-decrement" && timerMinutes > 1) {
-      const newMins = this.state.timer.minutes - 1;
-      const { seconds } = this.state.timer;
       const initSession = this.state.initSessionLength - 1;
 
-      this.setState({ timer: { minutes: newMins, seconds: seconds } });
       this.setState({ initSessionLength: initSession });
     } else if (
       timer.currentTarget.id === "break-decrement" &&
       breakMinutes > 1
     ) {
-      const newMins = this.state.initBreakLength - 1;
-      const { seconds } = this.state.break;
       const initBreak = this.state.initBreakLength - 1;
 
-      this.setState({ break: { minutes: newMins, seconds: seconds } });
       this.setState({ initBreakLength: initBreak });
     }
   }
@@ -117,8 +105,6 @@ class App extends Component {
     let duration = this.state.timer.minutes * 60;
     duration += this.state.timer.seconds;
 
-    // console.log(duration);
-
     const mainTimer = window.setInterval(this.timer, 1000);
     this.setState({ clockTimer: mainTimer });
 
@@ -131,8 +117,6 @@ class App extends Component {
 
     let duration = this.state.break.minutes * 60;
     duration += this.state.break.seconds;
-
-    // console.log(duration);
 
     const mainTimer = window.setInterval(this.breakTimer, 1000);
     this.setState({ clockTimer: mainTimer });
@@ -155,8 +139,6 @@ class App extends Component {
       seconds--;
       this.setState({ timer: { minutes: minutes, seconds: seconds } });
     }
-
-    // console.log(minutes, seconds);
   }
 
   breakTimer() {
@@ -173,8 +155,6 @@ class App extends Component {
       seconds--;
       this.setState({ break: { minutes: minutes, seconds: seconds } });
     }
-
-    // console.log(minutes, seconds);
   }
 
   alarm() {
@@ -212,6 +192,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // Get Unit Test Script from freeCodeCamp.org
     const script = document.createElement("script");
 
     script.src =
@@ -251,14 +232,14 @@ class App extends Component {
             <button
               id="session-increment"
               className="btn"
-              onClick={!hasStarted ? e => this.increment(e) : null}
+              onClick={e => this.increment(e)}
             >
               <MaterialIcon icon="arrow_upward" />
             </button>
             <button
               id="session-decrement"
               className="btn"
-              onClick={!hasStarted ? e => this.decrement(e) : null}
+              onClick={e => this.decrement(e)}
             >
               <MaterialIcon icon="arrow_downward" />
             </button>
@@ -271,14 +252,14 @@ class App extends Component {
             <button
               id="break-increment"
               className="btn"
-              onClick={!hasStarted ? e => this.increment(e) : null}
+              onClick={e => this.increment(e)}
             >
               <MaterialIcon icon="arrow_upward" />
             </button>
             <button
               id="break-decrement"
               className="btn"
-              onClick={!hasStarted ? e => this.decrement(e) : null}
+              onClick={e => this.decrement(e)}
             >
               <MaterialIcon icon="arrow_downward" />
             </button>
@@ -310,6 +291,7 @@ class App extends Component {
             <MaterialIcon icon="loop" />
           </button>
         </div>
+        {/* Audio Element with link to Hosted Sound file */}
         <audio
           src="https://storage.cloud.google.com/my-little-alarm-sounds/Short-ringtone-for-notification.mp3?_ga=2.21506491.-1426996322.1544825551"
           id="beep"
