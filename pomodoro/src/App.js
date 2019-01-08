@@ -186,7 +186,7 @@ class App extends Component {
     this.setState({ clockTimer: null });
     this.setState({ alarmTimer: null });
     beep.play();
-    setTimeout(this.startTheBreak, 1500);
+    this.startTheBreak();
   }
 
   pause() {
@@ -208,7 +208,7 @@ class App extends Component {
     this.setState({ alarmTimer: null });
     beep.play();
     this.setTheClock();
-    setTimeout(this.startTheClock, 1500);
+    this.startTheClock();
   }
 
   componentDidMount() {
