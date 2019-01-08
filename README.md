@@ -4,7 +4,22 @@ A Pomodoro clock built for [Free Code Camp](https://freecodecamp.org) as one of 
 
 A finished project can be found [here on CodePen](https://codepen.io/freeCodeCamp/full/XpKrrW)
 
-## Here are a list of the User Stories which must be fulfilled in order to complete the project
+## In Order to Run Project Locally
+
+Either clone the repository using `git clone https://github.com/petercr/Pomodoro-clock.git`
+Or by downloading the .ZIP file and extract it locally
+
+You will need to have [NodeJS v. 8.\*](https://www.nodejs.org) or higher on your system to run the project
+
+Then change directory to from root to `pomodoro` by entering `cd pomodoro` in the terminal
+
+Install the dependencies by running `npm install` in the terminal
+
+In order to start in development mode run `npm run start`
+
+And in order to produce a final build run `npm run build`
+
+### Here are a list of the User Stories which must be fulfilled in order to complete the project
 
 - User Story #1: I can see an element with `id="break-label"` that contains a string (e.g. "Break Length").
 - User Story #2: I can see an element with `id="session-label"` that contains a string (e.g. "Session Length").
@@ -36,6 +51,7 @@ A finished project can be found [here on CodePen](https://codepen.io/freeCodeCam
 - User Story #28: The `audio` element with id of beep must stop playing and be rewound to the beginning when the element with the id of reset is clicked
 
 ### Link to the Unit Testing Script
+
 The link to the script used to test the project, and ensure that it passes
 all of the required tests is: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
 
