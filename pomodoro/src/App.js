@@ -20,7 +20,7 @@ class App extends Component {
       initSessionLength: 25,
       initBreakLength: 5,
       clockTimer: null,
-      alarmTimer: null
+      // alarmTimer: null
     };
 
     this.increment = this.increment.bind(this);
@@ -101,28 +101,31 @@ class App extends Component {
 
   startTheClock() {
     this.setState({ hasStarted: true });
+    this.setState({timer: {minutes: this.state.initSessionLength, seconds: 0}});
 
-    let duration = this.state.timer.minutes * 60;
-    duration += this.state.timer.seconds;
+    // let duration = this.state.timer.minutes * 60;
+    // duration += this.state.timer.seconds;
 
     const mainTimer = window.setInterval(this.timer, 1000);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.alarm, duration * 1000 + 100);
-    this.setState({ alarmTimer: alarmTimer });
+    // const alarmTimer = window.setTimeout(this.alarm, duration * 1000 + 100);
+    // this.setState({ alarmTimer: alarmTimer });
   }
 
   startTheBreak() {
     this.setState({ hasStarted: true });
+    this.setState({break: {minutes: this.state.initBreakLength, seconds: 0}});
 
-    let duration = this.state.break.minutes * 60;
-    duration += this.state.break.seconds;
+
+    // let duration = this.state.break.minutes * 60;
+    // duration += this.state.break.seconds;
 
     const mainTimer = window.setInterval(this.breakTimer, 1000);
     this.setState({ clockTimer: mainTimer });
 
-    const alarmTimer = window.setTimeout(this.finish, duration * 1000 + 100);
-    this.setState({ alarmTimer: alarmTimer });
+    // const alarmTimer = window.setTimeout(this.finish, duration * 1000 + 100);
+    // this.setState({ alarmTimer: alarmTimer });
   }
 
   timer() {
@@ -162,18 +165,18 @@ class App extends Component {
 
     this.setState({ selection: "Break" });
     window.clearInterval(this.state.clockTimer);
-    window.clearTimeout(this.state.alarmTimer);
+    // window.clearTimeout(this.state.alarmTimer);
     this.setState({ clockTimer: null });
-    this.setState({ alarmTimer: null });
+    // this.setState({ alarmTimer: null });
     beep.play();
     this.startTheBreak();
   }
 
   pause() {
     window.clearInterval(this.state.clockTimer);
-    window.clearTimeout(this.state.alarmTimer);
+    // window.clearTimeout(this.state.alarmTimer);
     this.setState({ clockTimer: null });
-    this.setState({ alarmTimer: null });
+    // this.setState({ alarmTimer: null });
 
     this.setState({ hasStarted: false });
   }
@@ -183,9 +186,9 @@ class App extends Component {
 
     this.setState({ selection: "Session" });
     window.clearInterval(this.state.clockTimer);
-    window.clearTimeout(this.state.alarmTimer);
+    // window.clearTimeout(this.state.alarmTimer);
     this.setState({ clockTimer: null });
-    this.setState({ alarmTimer: null });
+    // this.setState({ alarmTimer: null });
     beep.play();
     this.setTheClock();
     this.startTheClock();
