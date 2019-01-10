@@ -19,7 +19,7 @@ class App extends Component {
       hasStarted: false,
       initSessionLength: 25,
       initBreakLength: 5,
-      clockTimer: null,
+      clockTimer: null
       // alarmTimer: null
     };
 
@@ -100,23 +100,24 @@ class App extends Component {
   }
 
   startTheClock() {
-    this.setState({ hasStarted: true });
-    this.setState({timer: {minutes: this.state.initSessionLength, seconds: 0}});
-
-    // let duration = this.state.timer.minutes * 60;
-    // duration += this.state.timer.seconds;
+    // Check to see if clock has already started
+    if (this.state.timer.minutes < this.state.initSessionLength) {
+      this.setState({ hasStarted: true });
+      this.setState({
+        timer: { minutes: this.state.initSessionLength, seconds: 0 }
+      });
+    } else {
+    }
 
     const mainTimer = window.setInterval(this.timer, 1000);
     this.setState({ clockTimer: mainTimer });
-
-    // const alarmTimer = window.setTimeout(this.alarm, duration * 1000 + 100);
-    // this.setState({ alarmTimer: alarmTimer });
   }
 
   startTheBreak() {
     this.setState({ hasStarted: true });
-    this.setState({break: {minutes: this.state.initBreakLength, seconds: 0}});
-
+    this.setState({
+      break: { minutes: this.state.initBreakLength, seconds: 0 }
+    });
 
     // let duration = this.state.break.minutes * 60;
     // duration += this.state.break.seconds;
