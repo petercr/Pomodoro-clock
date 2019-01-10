@@ -16,11 +16,11 @@ class App extends Component {
         seconds: 0
       },
       selection: "Session",
+      isGoing: false,
       hasStarted: false,
       initSessionLength: 25,
       initBreakLength: 5,
       clockTimer: null
-      // alarmTimer: null
     };
 
     this.increment = this.increment.bind(this);
@@ -86,8 +86,8 @@ class App extends Component {
     // Clear any alarms or timers that started
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
+    this.setState({ isGoing: false });
     this.setState({ hasStarted: false });
-
     this.setState({ selection: "Session" });
   }
 
@@ -101,20 +101,20 @@ class App extends Component {
 
   startTheClock() {
     // Check to see if clock has already started
-    if (this.state.timer.minutes < this.state.initSessionLength) {
+    if (!this.state.hasStarted) {
+      this.setState({ isGoing: true });
       this.setState({ hasStarted: true });
       this.setState({
         timer: { minutes: this.state.initSessionLength, seconds: 0 }
       });
-    } else {
     }
 
-    const mainTimer = window.setInterval(this.timer, 1000);
+    const mainTimer = window.setInterval(this.timer, 100);
     this.setState({ clockTimer: mainTimer });
   }
 
   startTheBreak() {
-    this.setState({ hasStarted: true });
+    this.setState({ isGoing: true });
     this.setState({
       break: { minutes: this.state.initBreakLength, seconds: 0 }
     });
@@ -122,7 +122,7 @@ class App extends Component {
     // let duration = this.state.break.minutes * 60;
     // duration += this.state.break.seconds;
 
-    const mainTimer = window.setInterval(this.breakTimer, 1000);
+    const mainTimer = window.setInterval(this.breakTimer, 100);
     this.setState({ clockTimer: mainTimer });
 
     // const alarmTimer = window.setTimeout(this.finish, duration * 1000 + 100);
@@ -179,7 +179,7 @@ class App extends Component {
     this.setState({ clockTimer: null });
     // this.setState({ alarmTimer: null });
 
-    this.setState({ hasStarted: false });
+    this.setState({ isGoing: false });
   }
 
   finish() {
@@ -209,7 +209,7 @@ class App extends Component {
   render() {
     const initSession = this.state.initSessionLength;
     const initBreak = this.state.initBreakLength;
-    const hasStarted = this.state.hasStarted;
+    const isGoing = this.state.isGoing;
 
     // Show the time from active timer
     const display_mins =
@@ -286,7 +286,7 @@ class App extends Component {
           <button
             id="start_stop"
             className="btn"
-            onClick={!hasStarted ? () => this.startTheClock(this) : this.pause}
+            onClick={!isGoing ? () => this.startTheClock(this) : this.pause}
           >
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
