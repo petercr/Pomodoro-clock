@@ -122,14 +122,9 @@ class App extends Component {
       break: { minutes: this.state.initBreakLength, seconds: 0 }
     });
 
-    // let duration = this.state.break.minutes * 60;
-    // duration += this.state.break.seconds;
-
     const mainTimer = window.setInterval(this.breakTimer, 100);
     this.setState({ clockTimer: mainTimer });
 
-    // const alarmTimer = window.setTimeout(this.finish, duration * 1000 + 100);
-    // this.setState({ alarmTimer: alarmTimer });
   }
 
   timer() {
@@ -169,9 +164,7 @@ class App extends Component {
 
     this.setState({ selection: "Break" });
     window.clearInterval(this.state.clockTimer);
-    // window.clearTimeout(this.state.alarmTimer);
     this.setState({ clockTimer: null });
-    // this.setState({ alarmTimer: null });
     beep.play();
     this.startTheBreak();
   }
@@ -190,9 +183,7 @@ class App extends Component {
 
     this.setState({ selection: "Session" });
     window.clearInterval(this.state.clockTimer);
-    // window.clearTimeout(this.state.alarmTimer);
     this.setState({ clockTimer: null });
-    // this.setState({ alarmTimer: null });
     beep.play();
     this.setTheClock();
     this.startTheClock();
