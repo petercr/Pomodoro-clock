@@ -17,7 +17,7 @@ class App extends Component {
       },
       selection: "Session",
       isGoing: false,
-      hasStarted: false,
+      isPaused: false,
       initSessionLength: 25,
       initBreakLength: 5,
       clockTimer: null
@@ -87,7 +87,7 @@ class App extends Component {
     window.clearInterval(this.state.clockTimer);
     window.clearTimeout(this.state.alarmTimer);
     this.setState({ isGoing: false });
-    this.setState({ hasStarted: false });
+    this.setState({ isPaused: false });
     this.setState({ selection: "Session" });
   }
 
@@ -101,9 +101,12 @@ class App extends Component {
 
   startTheClock() {
     // Check to see if clock has already started
-    if (!this.state.hasStarted) {
+    if (this.state.isPaused) {
       this.setState({ isGoing: true });
-      this.setState({ hasStarted: true });
+      this.setState({ isPaused: false });
+      
+    } else {
+      this.setState({ isGoing: true });
       this.setState({
         timer: { minutes: this.state.initSessionLength, seconds: 0 }
       });
@@ -174,11 +177,11 @@ class App extends Component {
   }
 
   pause() {
+    
     window.clearInterval(this.state.clockTimer);
-    // window.clearTimeout(this.state.alarmTimer);
     this.setState({ clockTimer: null });
-    // this.setState({ alarmTimer: null });
 
+    this.setState({ isPaused: true});
     this.setState({ isGoing: false });
   }
 
@@ -286,7 +289,7 @@ class App extends Component {
           <button
             id="start_stop"
             className="btn"
-            onClick={!isGoing ? () => this.startTheClock(this) : this.pause}
+            onClick={!isGoing || this.state.isPaused === true ? () => this.startTheClock(this) : this.pause}
           >
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
