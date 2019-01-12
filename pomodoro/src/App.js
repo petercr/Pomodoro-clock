@@ -112,7 +112,7 @@ class App extends Component {
       });
     }
 
-    const mainTimer = window.setInterval(this.timer, 100);
+    const mainTimer = window.setInterval(this.timer, 1000);
     this.setState({ clockTimer: mainTimer });
   }
 
@@ -122,7 +122,7 @@ class App extends Component {
       break: { minutes: this.state.initBreakLength, seconds: 0 }
     });
 
-    const mainTimer = window.setInterval(this.breakTimer, 100);
+    const mainTimer = window.setInterval(this.breakTimer, 1000);
     this.setState({ clockTimer: mainTimer });
 
   }
