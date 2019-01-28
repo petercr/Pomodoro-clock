@@ -44,10 +44,7 @@ class App extends Component {
       const initSession = this.state.initSessionLength + 1;
 
       this.setState({ initSessionLength: initSession });
-    } else if (
-      timer.currentTarget.id === "break-increment" &&
-      breakMinutes < 60
-    ) {
+    } else if (timer.currentTarget.id === "break-increment" && breakMinutes < 60) {
       const initBreak = this.state.initBreakLength + 1;
 
       this.setState({ initBreakLength: initBreak });
@@ -62,10 +59,7 @@ class App extends Component {
       const initSession = this.state.initSessionLength - 1;
 
       this.setState({ initSessionLength: initSession });
-    } else if (
-      timer.currentTarget.id === "break-decrement" &&
-      breakMinutes > 1
-    ) {
+    } else if (timer.currentTarget.id === "break-decrement" && breakMinutes > 1) {
       const initBreak = this.state.initBreakLength - 1;
 
       this.setState({ initBreakLength: initBreak });
@@ -77,11 +71,10 @@ class App extends Component {
     beep.currentTime = 0;
     beep.pause();
 
-    // Reset everything to 25-5 time
-    this.setState({ timer: { minutes: 25, seconds: 0 } });
-    this.setState({ break: { minutes: 5, seconds: 0 } });
-    this.setState({ initSessionLength: 25 });
-    this.setState({ initBreakLength: 5 });
+    // Reset everything to start values
+    const { initSessionLength, initBreakLength } = this.state;
+    this.setState({ timer: { minutes: initSessionLength, seconds: 0 } });
+    this.setState({ break: { minutes: initBreakLength, seconds: 0 } });
 
     // Clear any alarms or timers that started
     window.clearInterval(this.state.clockTimer);
@@ -104,7 +97,6 @@ class App extends Component {
     if (this.state.isPaused) {
       this.setState({ isGoing: true });
       this.setState({ isPaused: false });
-      
     } else {
       this.setState({ isGoing: true });
       this.setState({
@@ -124,7 +116,6 @@ class App extends Component {
 
     const mainTimer = window.setInterval(this.breakTimer, 1000);
     this.setState({ clockTimer: mainTimer });
-
   }
 
   timer() {
@@ -170,11 +161,10 @@ class App extends Component {
   }
 
   pause() {
-    
     window.clearInterval(this.state.clockTimer);
     this.setState({ clockTimer: null });
 
-    this.setState({ isPaused: true});
+    this.setState({ isPaused: true });
     this.setState({ isGoing: false });
   }
 
@@ -189,17 +179,6 @@ class App extends Component {
     this.startTheClock();
   }
 
-  componentDidMount() {
-    // Get Unit Test Script from freeCodeCamp.org
-    const script = document.createElement("script");
-
-    script.src =
-      "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js";
-    script.async = true;
-
-    document.body.appendChild(script);
-  }
-
   render() {
     const initSession = this.state.initSessionLength;
     const initBreak = this.state.initBreakLength;
@@ -207,16 +186,20 @@ class App extends Component {
 
     // Show the time from active timer
     const display_mins =
-      this.state.selection === "Session"
-        ? this.state.timer.minutes
-        : this.state.break.minutes;
+      this.state.selection === "Session" ? this.state.timer.minutes : this.state.break.minutes;
     const display_secs =
-      this.state.selection === "Session"
-        ? this.state.timer.seconds
-        : this.state.break.seconds;
+      this.state.selection === "Session" ? this.state.timer.seconds : this.state.break.seconds;
 
     return (
       <div className="App">
+        {/* The 6 layers for the SCSS snow effect */}
+        <div className="snow layer1 a" />
+        <div className="snow layer1" />
+        <div className="snow layer2 a" />
+        <div className="snow layer2" />
+        <div className="snow layer3 a" />
+        <div className="snow layer3" />
+
         <header className="App-header">
           <h1>Pomodoro Clock</h1>
         </header>
@@ -227,18 +210,10 @@ class App extends Component {
             <p id="session-label">Session Length</p>
             <p id="session-length">{initSession}</p>
             <div className="button-style" />
-            <button
-              id="session-increment"
-              className="btn"
-              onClick={e => this.increment(e)}
-            >
+            <button id="session-increment" className="btn" onClick={e => this.increment(e)}>
               <MaterialIcon icon="arrow_upward" />
             </button>
-            <button
-              id="session-decrement"
-              className="btn"
-              onClick={e => this.decrement(e)}
-            >
+            <button id="session-decrement" className="btn" onClick={e => this.decrement(e)}>
               <MaterialIcon icon="arrow_downward" />
             </button>
           </div>
@@ -247,18 +222,10 @@ class App extends Component {
             <p id="break-label">Break Length</p>
             <p id="break-length">{initBreak}</p>
             <div className="button-style" />
-            <button
-              id="break-increment"
-              className="btn"
-              onClick={e => this.increment(e)}
-            >
+            <button id="break-increment" className="btn" onClick={e => this.increment(e)}>
               <MaterialIcon icon="arrow_upward" />
             </button>
-            <button
-              id="break-decrement"
-              className="btn"
-              onClick={e => this.decrement(e)}
-            >
+            <button id="break-decrement" className="btn" onClick={e => this.decrement(e)}>
               <MaterialIcon icon="arrow_downward" />
             </button>
           </div>
@@ -280,8 +247,9 @@ class App extends Component {
           <button
             id="start_stop"
             className="btn"
-            onClick={!isGoing || this.state.isPaused === true ? () => this.startTheClock(this) : this.pause}
-          >
+            onClick={
+              !isGoing || this.state.isPaused === true ? () => this.startTheClock(this) : this.pause
+            }>
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
