@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./App.scss";
 // eslint-disable-next-line
 import MaterialIcon, { colorPalette } from "material-icons-react";
 
