@@ -2,11 +2,16 @@
 .App {
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(farthest-corner at 30vw 20vh, #7397a1 1%, #3f2c41 100%);
+  background: radial-gradient(
+    farthest-corner at 30vw 20vh,
+    #7397a1 1%,
+    #3f2c41 100%
+  );
   text-align: center;
   overflow: hidden;
   color: rgb(172, 36, 160);
   text-shadow: 1px 1px 2px rgba($color: #fcecec, $alpha: 0.6);
+  z-index: 900;
   // transform: translateY(-5vh) ;
 }
 
@@ -21,7 +26,7 @@
   justify-content: space-evenly;
   font-size: 20px;
   font-weight: bold;
-  z-index: -15;
+  z-index: 1000;
 }
 
 .button-area {
@@ -32,6 +37,7 @@
 #time-left {
   font-size: 20px;
   font-weight: bold;
+  z-index: 1000;
 }
 
 // Snow layer effect SCSS
