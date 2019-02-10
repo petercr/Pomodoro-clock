@@ -36,6 +36,15 @@
   padding-bottom: 20px;
 }
 
+.icons {
+  display: flex;
+  justify-content: center;
+}
+
+.icons i {
+  padding: 10%;
+}
+
 // Styling by Id
 #time-left {
   z-index: 10;
@@ -94,11 +103,12 @@ $s3: "";
 .snow {
   border-radius: 50%;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
   top: -100vh;
   animation-name: fall;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  z-index: 0;
 }
 .layer1 {
   z-index: 3;
@@ -139,5 +149,42 @@ $s3: "";
 @keyframes fall {
   100% {
     transform: translateY(200vh);
+  }
+}
+
+// Media Queries for small screens
+@media (max-width: 720px) {
+  .icons i {
+    padding: 10px;
+  }
+
+  // Snow effects below
+  .layer3,
+  .layer3.a {
+    visibility: hidden;
+  }
+  .layer1 {
+    z-index: 3;
+    width: 0.8rem;
+    height: 0.6rem;
+    filter: blur(1px);
+    box-shadow: #{$s1};
+    animation-duration: 10s;
+  }
+  .layer1.a {
+    z-index: 3;
+    animation-delay: -2s;
+  }
+  .layer2 {
+    z-index: 2;
+    width: 0.8rem;
+    height: 1rem;
+    filter: blur(3px);
+    box-shadow: #{$s2};
+    animation-duration: 11s;
+  }
+  .layer2.a {
+    z-index: 2;
+    animation-delay: -6s;
   }
 }
