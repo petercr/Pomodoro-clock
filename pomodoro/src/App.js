@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./App.scss";
 // eslint-disable-next-line
 import MaterialIcon, { colorPalette } from "material-icons-react";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 class App extends Component {
   constructor() {
@@ -20,7 +23,8 @@ class App extends Component {
       isPaused: false,
       initSessionLength: 25,
       initBreakLength: 5,
-      clockTimer: null
+      clockTimer: null,
+      modalIsOpen: false
     };
 
     this.increment = this.increment.bind(this);
@@ -34,6 +38,16 @@ class App extends Component {
     this.finish = this.finish.bind(this);
     this.startTheBreak = this.startTheBreak.bind(this);
     this.breakTimer = this.breakTimer.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
   }
 
   increment(timer) {
@@ -44,7 +58,10 @@ class App extends Component {
       const initSession = this.state.initSessionLength + 1;
 
       this.setState({ initSessionLength: initSession });
-    } else if (timer.currentTarget.id === "break-increment" && breakMinutes < 60) {
+    } else if (
+      timer.currentTarget.id === "break-increment" &&
+      breakMinutes < 60
+    ) {
       const initBreak = this.state.initBreakLength + 1;
 
       this.setState({ initBreakLength: initBreak });
@@ -59,7 +76,10 @@ class App extends Component {
       const initSession = this.state.initSessionLength - 1;
 
       this.setState({ initSessionLength: initSession });
-    } else if (timer.currentTarget.id === "break-decrement" && breakMinutes > 1) {
+    } else if (
+      timer.currentTarget.id === "break-decrement" &&
+      breakMinutes > 1
+    ) {
       const initBreak = this.state.initBreakLength - 1;
 
       this.setState({ initBreakLength: initBreak });
@@ -186,12 +206,28 @@ class App extends Component {
 
     // Show the time from active timer
     const display_mins =
-      this.state.selection === "Session" ? this.state.timer.minutes : this.state.break.minutes;
+      this.state.selection === "Session"
+        ? this.state.timer.minutes
+        : this.state.break.minutes;
     const display_secs =
-      this.state.selection === "Session" ? this.state.timer.seconds : this.state.break.seconds;
+      this.state.selection === "Session"
+        ? this.state.timer.seconds
+        : this.state.break.seconds;
 
     return (
       <div className="App">
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          contentLabel="Information on Pomodoro Clock's"
+        >
+          <div>
+            <h2>More about Pomodoro Clocks</h2>
+            <p>More info about Pomodoro Clocks to be found here</p>
+            <button onClick={this.closeModal}>Close</button>
+          </div>
+        </Modal>
+
         {/* The 6 layers for the SCSS snow effect */}
         <div className="snow layer1 a" />
         <div className="snow layer1" />
@@ -210,10 +246,18 @@ class App extends Component {
             <p id="session-label">Session Length</p>
             <p id="session-length">{initSession}</p>
             <div className="button-style" />
-            <button id="session-increment" className="btn" onClick={e => this.increment(e)}>
+            <button
+              id="session-increment"
+              className="btn"
+              onClick={e => this.increment(e)}
+            >
               <MaterialIcon icon="arrow_upward" />
             </button>
-            <button id="session-decrement" className="btn" onClick={e => this.decrement(e)}>
+            <button
+              id="session-decrement"
+              className="btn"
+              onClick={e => this.decrement(e)}
+            >
               <MaterialIcon icon="arrow_downward" />
             </button>
           </div>
@@ -222,10 +266,18 @@ class App extends Component {
             <p id="break-label">Break Length</p>
             <p id="break-length">{initBreak}</p>
             <div className="button-style" />
-            <button id="break-increment" className="btn" onClick={e => this.increment(e)}>
+            <button
+              id="break-increment"
+              className="btn"
+              onClick={e => this.increment(e)}
+            >
               <MaterialIcon icon="arrow_upward" />
             </button>
-            <button id="break-decrement" className="btn" onClick={e => this.decrement(e)}>
+            <button
+              id="break-decrement"
+              className="btn"
+              onClick={e => this.decrement(e)}
+            >
               <MaterialIcon icon="arrow_downward" />
             </button>
           </div>
@@ -248,8 +300,11 @@ class App extends Component {
             id="start_stop"
             className="btn"
             onClick={
-              !isGoing || this.state.isPaused === true ? () => this.startTheClock(this) : this.pause
-            }>
+              !isGoing || this.state.isPaused === true
+                ? () => this.startTheClock(this)
+                : this.pause
+            }
+          >
             <MaterialIcon icon="play_arrow" />
             <MaterialIcon icon="pause_circle_outline" />
           </button>
@@ -262,6 +317,13 @@ class App extends Component {
           src="https://storage.cloud.google.com/my-little-alarm-sounds/Short-ringtone-for-notification.mp3?_ga=2.21506491.-1426996322.1544825551"
           id="beep"
         />
+        <div className="icons">
+          <i className="fab fa-github fa-4x" />
+          <i
+            className="fas fa-question-circle fa-4x"
+            onClick={this.openModal}
+          />
+        </div>
       </div>
     );
   }
