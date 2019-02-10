@@ -228,7 +228,7 @@ class App extends Component {
               developed by Francesco Cirillo in the late 1980s.The technique
               uses a timer to break down work into intervals, traditionally 25
               minutes in length, separated by short breaks. Each interval is
-              known as a<b>pomodoro</b>, from the Italian word for a tomato,
+              known as a <b>pomodoro</b>, from the Italian word for a tomato,
               after the tomato-shaped kitchen timer that Cirillo used as a
               university student. The technique has been widely popularized by
               dozens of apps and websites providing timers and instructions.
@@ -236,7 +236,8 @@ class App extends Component {
               incremental development used in software design, the method has
               been adopted in pair programming contexts.
               <br />
-              <em>Excerpt from Wikipedia Pomodoro Technique Page</em>
+              <br />
+              <em>Excerpt from Wikipedia Page: Pomodoro Technique Page</em>
             </p>
             <button className="modal-btn" onClick={this.closeModal}>
               Close
@@ -334,7 +335,15 @@ class App extends Component {
           id="beep"
         />
         <div className="icons">
-          <i className="fab fa-github fa-4x" />
+          <i
+            className="fab fa-github fa-4x"
+            onClick={() =>
+              window.open(
+                "https://www.github.com/petercr/Pomodoro-clock",
+                "_blank"
+              )
+            }
+          />
           <i
             className="fas fa-question-circle fa-4x"
             onClick={this.openModal}
