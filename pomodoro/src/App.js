@@ -221,10 +221,26 @@ class App extends Component {
           onRequestClose={this.closeModal}
           contentLabel="Information on Pomodoro Clock's"
         >
-          <div>
+          <div className="modal">
             <h2>More about Pomodoro Clocks</h2>
-            <p>More info about Pomodoro Clocks to be found here</p>
-            <button onClick={this.closeModal}>Close</button>
+            <p>
+              The <b>Pomodoro Technique</b> is a time management method
+              developed by Francesco Cirillo in the late 1980s.The technique
+              uses a timer to break down work into intervals, traditionally 25
+              minutes in length, separated by short breaks. Each interval is
+              known as a<b>pomodoro</b>, from the Italian word for a tomato,
+              after the tomato-shaped kitchen timer that Cirillo used as a
+              university student. The technique has been widely popularized by
+              dozens of apps and websites providing timers and instructions.
+              Closely related to concepts such as timeboxing and iterative and
+              incremental development used in software design, the method has
+              been adopted in pair programming contexts.
+              <br />
+              <em>Excerpt from Wikipedia Pomodoro Technique Page</em>
+            </p>
+            <button className="modal-btn" onClick={this.closeModal}>
+              Close
+            </button>
           </div>
         </Modal>
 
