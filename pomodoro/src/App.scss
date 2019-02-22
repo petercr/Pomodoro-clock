@@ -45,6 +45,12 @@
   padding: 10%;
 }
 
+.modal {
+  position: absolute;
+  z-index: 200;
+  color: rgb(226, 16, 226);
+}
+
 // Styling by Id
 #time-left {
   z-index: 10;
@@ -111,6 +117,7 @@ $s3: "";
   z-index: 0;
 }
 .layer1 {
+  position: fixed;
   z-index: 3;
   width: 1.5rem;
   height: 1.5rem;
@@ -119,10 +126,12 @@ $s3: "";
   animation-duration: 10s;
 }
 .layer1.a {
+  position: fixed;
   z-index: 3;
   animation-delay: -5s;
 }
 .layer2 {
+  position: fixed;
   z-index: 2;
   width: 1.2rem;
   height: 1.2rem;
@@ -131,10 +140,12 @@ $s3: "";
   animation-duration: 12s;
 }
 .layer2.a {
+  position: fixed;
   z-index: 2;
   animation-delay: -7s;
 }
 .layer3 {
+  position: fixed;
   z-index: 1;
   width: 0.8rem;
   height: 0.8rem;
@@ -143,6 +154,7 @@ $s3: "";
   animation-duration: 14s;
 }
 .layer3.a {
+  position: fixed;
   z-index: 1;
   animation-delay: -9s;
 }
